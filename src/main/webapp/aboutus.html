@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us — QuyNhonTour</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --sea:#0477b3;
+      --sand:#f3d9ac;
+      --accent:#ff9f43;
+      --muted:#6b7280;
+      --card:rgba(255,255,255,0.9);
+      --glass:rgba(255,255,255,0.08);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#f8fbfd 0%, #eef7fb 100%);color:#0f172a;line-height:1.5}
+
+    .container{max-width:1100px;margin:36px auto;padding:24px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+    .hero-card{background:linear-gradient(135deg,var(--card),#ffffff);border-radius:18px;box-shadow:0 8px 30px rgba(2,6,23,0.08);padding:34px}
+    .kicker{display:inline-flex;gap:10px;align-items:center;padding:6px 10px;border-radius:999px;background:var(--glass);font-weight:600;color:var(--sea);font-size:13px}
+    h1{font-size:32px;margin:12px 0 8px}
+    p.lead{color:var(--muted);margin:0 0 18px}
+    .cta{display:flex;gap:12px;margin-top:14px}
+    .btn{padding:12px 18px;border-radius:12px;border:0;font-weight:600;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--sea),#0bb5e6);color:white;box-shadow:0 6px 18px rgba(4,119,179,0.24)}
+    .btn-ghost{background:transparent;border:1px solid rgba(15,23,42,0.06);color:var(--sea)}
+
+    /* Quick info */
+    .hero-meta{display:grid;gap:12px}
+    .meta-card{background:linear-gradient(180deg,rgba(255,255,255,0.9), rgba(255,255,255,0.95));padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .meta-card h3{margin:6px 0;font-size:16px}
+    .meta-card p{margin:0;color:var(--muted)}
+
+    /* Sections */
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}
+    section.card{background:white;border-radius:14px;padding:20px;box-shadow:0 6px 24px rgba(2,6,23,0.04)}
+    section.card h2{margin-top:0}
+    ul.services{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:10px}
+    ul.services li{display:flex;gap:12px;align-items:flex-start}
+    .icon{width:44px;height:44px;border-radius:10px;display:inline-grid;place-items:center;background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.6));box-shadow:inset 0 -6px 18px rgba(0,0,0,0.03)}
+
+    /* Contact */
+    .contact-card{display:flex;flex-direction:column;gap:12px;border-radius:12px;padding:18px;background:linear-gradient(180deg,#ffffff,#fefcf7);box-shadow:0 10px 30px rgba(2,6,23,0.06)}
+    .contact-row{display:flex;gap:12px;align-items:center}
+    .contact-row a{color:var(--sea);text-decoration:none;font-weight:600}
+
+    footer{margin-top:34px;text-align:center;color:var(--muted);font-size:14px}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="hero">
+      <div class="hero-card">
+        <div class="kicker">🌊 QuyNhonTour</div>
+        <h1>Spreading the beauty of Quy Nhon — Journeys that stay in your heart</h1>
+        <p class="lead">QuyNhonTour is a travel company based in Quy Nhon, born from our love for the sea, sunshine, and the people of Central Vietnam. We design safe, thoughtful, and experience-rich tours — from famous landmarks to hidden local gems.</p>
+
+        <div class="cta">
+          <button class="btn btn-primary" onclick="location.href='#contact'">Contact Us</button>
+          <button class="btn btn-ghost" onclick="location.href='#services'">Explore Services</button>
+        </div>
+
+        <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
+          <div style="min-width:160px;background:linear-gradient(90deg,var(--sea),#0bb5e6);color:white;padding:10px;border-radius:12px;font-weight:700">Mission: Bring Quy Nhon Closer</div>
+          <div style="min-width:160px;background:linear-gradient(90deg,#f59e0b,#ffb86b);color:white;padding:10px;border-radius:12px;font-weight:700">Vision: Top Brand in Central Vietnam</div>
+        </div>
+      </div>
+
+      <aside class="hero-meta">
+        <div class="meta-card">
+          <h3>About Us</h3>
+          <p>A young, local-savvy team — dedicated to providing professional, safe, and attentive service.</p>
+        </div>
+        <div class="meta-card">
+          <h3>Our Customers</h3>
+          <p>Serving thousands of domestic and international travelers, along with many business and educational partners.</p>
+        </div>
+        <div class="meta-card" id="contact">
+          <h3>Quick Contact</h3>
+          <p style="margin:6px 0"><strong>Email:</strong> <a href="mailto:quynhontour@gmail.com">quynhontour@gmail.com</a></p>
+          <p style="margin:0"><strong>Hotline:</strong> <a href="tel:+84384757752">+84 384757752</a></p>
+        </div>
+      </aside>
+    </div>
+
+    <div class="grid" style="margin-top:26px">
+      <section class="card">
+        <h2>Core Values</h2>
+        <p style="color:var(--muted)">Every service we build is based on: Sincerity, Professionalism, Creativity, and Local Identity.</p>
+        <ul class="services" style="margin-top:12px">
+          <li>
+            <span class="icon">📍</span>
+            <div>
+              <strong>Sincerity</strong>
+              <div style="color:var(--muted)">Listening to customers and offering transparent, heartfelt advice.</div>
+            </div>
+          </li>
+          <li>
+            <span class="icon">🛡️</span>
+            <div>
+              <strong>Professionalism</strong>
+              <div style="color:var(--muted)">Clear process, experienced team, and guaranteed safety.</div>
+            </div>
+          </li>
+          <li>
+            <span class="icon">✨</span>
+            <div>
+              <strong>Creativity</strong>
+              <div style="color:var(--muted)">Crafting unique journeys with authentic local experiences.</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="card" id="services">
+        <h2>Main Services</h2>
+        <p style="color:var(--muted)">We offer a variety of travel services tailored for individuals, groups, and organizations.</p>
+        <ul class="services" style="margin-top:12px">
+          <li>
+            <span class="icon">🏝️</span>
+            <div>
+              <strong>Quy Nhon – Phu Yen – Binh Dinh Tours</strong>
+              <div style="color:var(--muted)">Professional itineraries led by local, knowledgeable guides.</div>
+            </div>
+          </li>
+          <li>
+            <span class="icon">🏨</span>
+            <div>
+              <strong>Hotel Booking & Vehicle Rental</strong>
+              <div style="color:var(--muted)">Partnering with trusted hotels and transport providers.</div>
+            </div>
+          </li>
+          <li>
+            <span class="icon">🤝</span>
+            <div>
+              <strong>Custom Tours & Team Building</strong>
+              <div style="color:var(--muted)">Tailored experiences based on your goals, schedule, and budget.</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 380px;gap:20px;margin-top:22px">
+      <section class="card">
+        <h2>What Makes Us Different?</h2>
+        <p style="color:var(--muted)">QuyNhonTour doesn’t just sell tours — we create experiences. Each journey is carefully crafted: smart schedules, curated destinations, local cuisine, and memorable moments that connect travelers with the soul of Quy Nhon.</p>
+
+        <h3 style="margin-top:14px">Our Commitments</h3>
+        <ul style="color:var(--muted);margin-top:8px">
+          <li>Safety is our top priority.</li>
+          <li>Transparent pricing and terms.</li>
+          <li>Excellent customer support — before, during, and after the trip.</li>
+        </ul>
+      </section>
+
+      <aside class="contact-card">
+        <h3>Contact Us</h3>
+        <div class="contact-row">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 5.5C2 4.67157 2.67157 4 3.5 4H20.5C21.3284 4 22 4.67157 22 5.5V18.5C22 19.3284 21.3284 20 20.5 20H3.5C2.67157 20 2 19.3284 2 18.5V5.5Z" stroke="#0477b3" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <div style="font-size:14px;color:var(--muted)">Email</div>
+            <a href="mailto:quynhontour@gmail.com">quynhontour@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19 19 0 0 1 3 4.11 1 1 0 0 1 4 3h4.08a1 1 0 0 1 1 .75c.12.66.34 1.3.65 1.88a1 1 0 0 1-.23 1.05l-1.27 1.27a16 16 0 0 0 6.59 6.59l1.27-1.27a1 1 0 0 1 1.05-.23c.58.31 1.22.53 1.88.65a1 1 0 0 1 .75 1z" stroke="#0477b3" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <div style="font-size:14px;color:var(--muted)">Hotline</div>
+            <a href="tel:+84384757752">+84 384757752</a>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z" stroke="#0477b3" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <div style="font-size:14px;color:var(--muted)">Address</div>
+            <div>Quy Nhon – Gia Lai, Vietnam</div>
+          </div>
+        </div>
+
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <a href="mailto:quynhontour@gmail.com" class="btn btn-primary" style="padding:10px 12px;border-radius:10px">Send Email</a>
+          <a href="tel:+84384757752" class="btn btn-ghost" style="padding:10px 12px;border-radius:10px">Call Now</a>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © <span id="year"></span> QuyNhonTour — All rights reserved. Designed with ❤️ for Quy Nhon.
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
