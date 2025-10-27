@@ -147,7 +147,7 @@
     </div>
     <div class="price-item child">
       <h4>🧒 Child Price</h4>
-      <p><strong>880.000 VNĐ / child</strong></p>
+      <p><strong>880.000 VNĐ / child (free for children under 2 years old)</strong></p>
     </div>
   </div>
 

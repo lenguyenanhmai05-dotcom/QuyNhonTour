@@ -196,27 +196,29 @@
 
 <script>
   function initMap() {
-    const banhittower = { lat: 13.7615, lng: 109.2385 };
+    // 🕌 Vị trí Tháp Bánh Ít - Bình Định
+    const thapBanhIt = { lat: 13.8718, lng: 109.1225 };
 
     // Tạo bản đồ
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 12,
-      center: banhittower,
+      zoom: 14,
+      center: thapBanhIt,
     });
 
-    // Thêm ghim (marker)
+    // Ghim (marker)
     new google.maps.Marker({
-      position: banhittower,
+      position: thapBanhIt,
       map: map,
-      title: "Banh It Tower, Thien Hung Pagoda, Quy Nhơn",
+      title: "Tháp Bánh Ít - Bình Định",
     });
   }
 </script>
 
-<!-- 🧭 Gọi Google Maps JavaScript API -->
+<!-- 🧭 Gọi Google Maps API -->
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbhZOTVNIVpefOMiP5aPqN18S5EmzhGAo&callback=initMap">
 </script>
+
 
        <!-- FOOTER -->
   <footer class="qnt-footer">

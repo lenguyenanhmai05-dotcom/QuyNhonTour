@@ -147,7 +147,7 @@
     </div>
     <div class="price-item child">
       <h4>🧒 Child Price</h4>
-      <p><strong>750.000 VNĐ / child</strong></p>
+      <p><strong>750.000 VNĐ / child (free for children under 2 years old)</strong></p>
     </div>
   </div>
 
@@ -176,30 +176,30 @@
   }
 </style>
 
-<script>
-  function initMap() {
-    // 🗺️ Vị trí Ky Co - Eo Gio (gần Quy Nhơn)
-    const tayson = { lat: 13.7615, lng: 109.2385 };
+  <script>
+    function initMap() {
+      // 🏛️ Vị trí Bảo Tàng Quang Trung
+      const baoTangQuangTrung = { lat: 13.9500, lng: 108.9503 };
 
-    // Tạo bản đồ
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 12,
-      center: tayson,
-    });
+      // Tạo bản đồ
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 13,
+        center: baoTangQuangTrung,
+      });
 
-    // Thêm ghim (marker)
-    new google.maps.Marker({
-      position: tayson,
-      map: map,
-      title: "Tay Son, Quy Nhơn",
-    });
-  }
-</script>
+      // Ghim (marker)
+      new google.maps.Marker({
+        position: baoTangQuangTrung,
+        map: map,
+        title: "Bảo Tàng Quang Trung, Tây Sơn",
+      });
+    }
+  </script>
 
-<!-- 🧭 Gọi Google Maps JavaScript API -->
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbhZOTVNIVpefOMiP5aPqN18S5EmzhGAo&callback=initMap">
-</script>
+  <!-- 🧭 Gọi Google Maps API -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbhZOTVNIVpefOMiP5aPqN18S5EmzhGAo&callback=initMap">
+  </script>
 
        <!-- FOOTER -->
   <footer class="qnt-footer">

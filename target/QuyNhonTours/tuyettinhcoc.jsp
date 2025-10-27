@@ -188,27 +188,29 @@
 
 <script>
   function initMap() {
-    const tuyettinhcoc = { lat: 13.7615, lng: 109.2385 };
+    // 💧 Vị trí Tuyệt Tình Cốc - Quy Nhơn
+    const tuyetTinhCoc = { lat: 13.8555, lng: 109.1658 };
 
     // Tạo bản đồ
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 12,
-      center: tuyettinhcoc,
+      zoom: 14,
+      center: tuyetTinhCoc,
     });
 
-    // Thêm ghim (marker)
+    // Ghim (marker)
     new google.maps.Marker({
-      position: tuyettinhcoc,
+      position: tuyetTinhCoc,
       map: map,
-      title: "Tuyet Tinh Coc, Quy Nhơn",
+      title: "Tuyệt Tình Cốc - Quy Nhơn",
     });
   }
 </script>
 
-<!-- 🧭 Gọi Google Maps JavaScript API -->
+<!-- 🧭 Gọi Google Maps API -->
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbhZOTVNIVpefOMiP5aPqN18S5EmzhGAo&callback=initMap">
 </script>
+
 
        <!-- FOOTER -->
   <footer class="qnt-footer">
