@@ -18,24 +18,48 @@ public class AddTourServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        String location = request.getParameter("location");
-        String priceStr = request.getParameter("price");
-        String startDate = request.getParameter("startDate");
-        String endDate = request.getParameter("endDate");
-
-        double price = 0;
         try {
-            if (priceStr != null && !priceStr.isEmpty())
-                price = Double.parseDouble(priceStr);
-        } catch (NumberFormatException ignored) {}
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
+            String location = request.getParameter("location");
+            String departure = request.getParameter("departure");
+            String destination = request.getParameter("destination");
+            String duration = request.getParameter("duration");
+            String startDate = request.getParameter("startDate");
+            String endDate = request.getParameter("endDate");
+            String priceAdultStr = request.getParameter("priceAdult");
+            String priceChildStr = request.getParameter("priceChild");
+            String image = request.getParameter("image");
 
-        Tour t = new Tour(name, description, location, price, startDate, endDate);
-        dao.addTour(t);
+            double priceAdult = 0;
+            double priceChild = 0;
 
-        response.sendRedirect(request.getContextPath() + "/admin/tours");
+            if (priceAdultStr != null && !priceAdultStr.trim().isEmpty()) {
+                priceAdult = Double.parseDouble(priceAdultStr);
+            }
+            if (priceChildStr != null && !priceChildStr.trim().isEmpty()) {
+                priceChild = Double.parseDouble(priceChildStr);
+            }
+
+            Tour tour = new Tour(
+        name, description, location, destination, departure,
+        duration, startDate, endDate, priceAdult, priceChild, image
+);
+
+            boolean success = dao.addTour(tour);
+            if (success) {
+                response.sendRedirect(request.getContextPath() + "/admin/tours?msg=added");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/tours?error=add_failed");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/admin/tours?error=server_error");
+        }
     }
 }

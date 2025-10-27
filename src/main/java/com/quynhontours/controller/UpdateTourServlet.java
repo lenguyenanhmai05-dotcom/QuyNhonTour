@@ -20,29 +20,54 @@ public class UpdateTourServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
-        String id = request.getParameter("id");
-        if (id == null || id.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/admin/tours");
-            return;
-        }
-
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        String location = request.getParameter("location");
-        String priceStr = request.getParameter("price");
-        String startDate = request.getParameter("startDate");
-        String endDate = request.getParameter("endDate");
-
-        double price = 0;
         try {
-            if (priceStr != null && !priceStr.isEmpty())
-                price = Double.parseDouble(priceStr);
-        } catch (NumberFormatException ignored) {}
+            String id = request.getParameter("id");
+            if (id == null || id.isEmpty()) {
+                response.sendRedirect(request.getContextPath() + "/admin/tours?error=missing_id");
+                return;
+            }
 
-        Tour t = new Tour(id, name, description, location, price, startDate, endDate);
-        dao.updateTour(t);
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
+            String location = request.getParameter("location");
+            String departure = request.getParameter("departure");
+            String destination = request.getParameter("destination");
+            String duration = request.getParameter("duration");
+            String startDate = request.getParameter("startDate");
+            String endDate = request.getParameter("endDate");
+            String priceAdultStr = request.getParameter("priceAdult");
+            String priceChildStr = request.getParameter("priceChild");
+            String image = request.getParameter("image");
 
-        response.sendRedirect(request.getContextPath() + "/admin/tours");
+            double priceAdult = 0;
+            double priceChild = 0;
+
+            if (priceAdultStr != null && !priceAdultStr.trim().isEmpty()) {
+                priceAdult = Double.parseDouble(priceAdultStr);
+            }
+            if (priceChildStr != null && !priceChildStr.trim().isEmpty()) {
+                priceChild = Double.parseDouble(priceChildStr);
+            }
+
+            Tour tour = new Tour(
+        id, name, description, location, destination,
+        departure, duration, startDate, endDate,
+        priceAdult, priceChild, image
+);
+
+
+            boolean success = dao.updateTour(tour);
+            if (success) {
+                response.sendRedirect(request.getContextPath() + "/admin/tours?msg=updated");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/tours?error=update_failed");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/admin/tours?error=server_error");
+        }
     }
 }

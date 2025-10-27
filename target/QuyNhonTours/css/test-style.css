@@ -1,0 +1,643 @@
+
+/* ===== Reset & Fonts ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #e0f7fa, #ffffff, #cce7ff);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #007BFF, #00BFFF);
+    padding: 15px 60px;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.logo a {
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    font-family: "Brush Script MT", cursive;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #f5f5f5;
+}
+
+/* ===== User Section ===== */
+.user-section {
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    background: white;
+    color: #007BFF;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-left: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #cce7ff;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.user-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.username {
+    font-weight: 500;
+}
+
+.admin-link {
+    background: white;
+    color: #007BFF;
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 0.9em;
+}
+
+.admin-link:hover {
+    background: #cce7ff;
+}
+
+.logout-btn {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 10px;
+    font-size: 0.9em;
+}
+
+.logout-btn:hover {
+    text-decoration: underline;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+    color: white;
+    position: relative;
+    height: 75vh; /* 👈 giảm chiều cao xuống để search box nằm vừa trong khung hình */
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 70, 0.3);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.hero-content h1 {
+  font-size: 3em;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.hero-content .palm {
+  display: block; /* 👈 khiến cây dừa xuống hàng riêng */
+  text-align: center; /* 👈 căn giữa cùng hàng với chữ trên */
+  margin-top: 5px; /* 👈 cách nhẹ phía trên */
+}
+
+.hero-content p {
+    font-size: 1.2em;
+}
+
+.explore-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #00BFFF, #007BFF);
+    color: white;
+    text-decoration: none;
+    padding: 12px 32px;
+    border-radius: 40px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    font-size: 1.05em;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+    transition: all 0.35s ease;
+    margin-top: 25px;
+}
+
+.explore-btn:hover {
+    background: linear-gradient(90deg, #0099e6, #0066ff);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.55);
+}
+
+/* ===== SEARCH TOUR ===== */
+.search-tour {
+    position: relative;
+    top: -70px; /* 👈 nâng lên cao hơn để “đè” lên phần hero */
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    padding: 30px 50px;
+    margin: 0 auto 60px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    width: 85%;
+    z-index: 2;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.search-tour:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Hide title */
+.search-tour h2 {
+    display: none;
+}
+
+.search-tour label {
+    display: block;
+    text-align: center;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+    position: relative;
+    top: -4px;
+}
+
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    min-width: 200px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #007BFF;
+}
+
+.btn-search {
+    background: linear-gradient(90deg, #007BFF, #00BFFF);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-search:hover {
+    background: linear-gradient(90deg, #0066cc, #0099e6);
+}
+
+
+/* ===== Dịch vụ nổi bật ===== */
+.services {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(135deg, #e8f4fd 0%, #f5fbff 100%);
+  background-image: url("https://www.transparenttextures.com/patterns/white-wall-3.png");
+  padding: 25px 0; /* 👈 giảm chiều cao tổng thể */
+  margin-top: -70px; /* vẫn nhích nhẹ lên */
+  border-radius: 25px 25px 0 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.service-item {
+  text-align: center;
+  flex: 1;
+  padding: 10px; /* 👈 giảm padding trong */
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-radius: 18px;
+}
+
+.service-item i {
+  font-size: 38px; /* 👈 nhỏ hơn một chút */
+  color: #0d6efd;
+  margin-bottom: 8px;
+  transition: transform 0.35s ease, color 0.35s ease;
+}
+
+.service-item p {
+  font-weight: 700;
+  font-size: 14px;
+  color: #0d1b2a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect */
+.service-item:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.12);
+}
+
+.service-item:hover i {
+  transform: scale(1.2);
+  color: #007BFF;
+}
+
+.service-item:hover p {
+  color: #1565c0;
+}
+
+/* ===== SECTION ===== */
+.featured-tours {
+  text-align: center;
+  padding: 70px 0 60px;
+  background: linear-gradient(180deg, #f7fbff 0%, #ffffff 100%);
+}
+
+.featured-tours h2 {
+  font-size: 2.3em;
+  color: #0d47a1;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.featured-tours .subtitle {
+  color: #555;
+  font-size: 1em;
+  margin-bottom: 45px;
+}
+
+/* ===== TOUR GALLERY ===== */
+.tour-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 35px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== TOUR ITEM ===== */
+.tour-item {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+.tour-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s ease;
+}
+
+/* ===== OVERLAY NỬA DƯỚI ===== */
+.tour-item .tour-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: rgba(255, 255, 255, 0.4); /* mờ nhẹ nửa dưới */
+  backdrop-filter: blur(4px);
+  color: #002b5b;
+  padding: 12px 16px;
+  opacity: 0;
+  transform: translateY(40%);
+  transition: all 0.45s ease;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+/* ===== HOVER EFFECT ===== */
+.tour-item:hover {
+  width: 280px;
+  height: 180px;
+  border-radius: 20px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.15);
+}
+
+.tour-item:hover img {
+  transform: scale(1.1);
+  filter: brightness(0.95);
+}
+
+.tour-item:hover .tour-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== TEXT ===== */
+.tour-info h3 {
+  font-size: 1.05em;
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+
+.tour-info p {
+  font-size: 0.85em;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .tour-item {
+    width: 130px;
+    height: 130px;
+  }
+  .tour-item:hover {
+    width: 230px;
+    height: 150px;
+  }
+}
+
+.why-choose-us {
+  background: linear-gradient(to bottom right, #f0f8ff, #ffffff);
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.why-choose-us h2 {
+  font-size: 2.3rem;
+  color: #1d3557;
+  margin-bottom: 60px;
+  font-weight: 700;
+}
+
+.why-choose-us h2 span {
+  color: #0077b6;
+}
+
+.reasons {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: nowrap; /* giữ 4 card luôn nằm ngang */
+}
+
+.reason-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 25px;
+  width: 270px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.reason-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.reason-card .icon {
+  font-size: 45px;
+  background: #e0f4ff;
+  color: #0077b6;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  transition: all 0.3s ease;
+}
+
+.reason-card:hover .icon {
+  background: #0077b6;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.reason-card h3 {
+  font-size: 1.2rem;
+  color: #023e8a;
+  margin-bottom: 15px;
+}
+
+.reason-card p {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Responsive - co lại cho màn hình nhỏ */
+@media (max-width: 992px) {
+  .reasons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .reason-card {
+    width: 45%;
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 600px) {
+  .reason-card {
+    width: 90%;
+  }
+}
+
+
+.footer {
+  background: linear-gradient(135deg, #1f66c3, #8abff8);
+  color: #fff;
+  padding: 60px 10%;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.footer-brand h2 {
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.footer-brand p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+.footer-links h3,
+.footer-contact h3,
+.footer-newsletter h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li {
+  margin: 8px 0;
+}
+
+.footer-links ul li a {
+  color: #e0e0e0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+  color: #fff;
+}
+
+.footer-contact p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #e0e0e0;
+}
+
+.footer-contact i {
+  margin-right: 8px;
+  color: #ffd700;
+}
+
+.footer-newsletter p {
+  font-size: 14px;
+  color: #e0e0e0;
+  margin-bottom: 10px;
+}
+
+.footer-newsletter form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-newsletter input {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.footer-newsletter button {
+  background: #ffd700;
+  color: #000;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.footer-newsletter button:hover {
+  background: #fff;
+  color: #007bff;
+}
+
+.social-icons {
+  margin-top: 15px;
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 18px;
+  margin-right: 12px;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #ffd700;
+  transform: scale(1.15);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 14px;
+  color: #d0d0d0;
+}
