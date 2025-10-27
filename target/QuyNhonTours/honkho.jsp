@@ -144,7 +144,7 @@
     </div>
     <div class="price-item child">
       <h4>🧒 Child Price</h4>
-      <p><strong>1.480.000 VNĐ / child</strong></p>
+      <p><strong>1.480.000 VNĐ / child (free for children under 2 years old)</strong></p>
     </div>
   </div>
 
@@ -175,27 +175,29 @@
 
 <script>
   function initMap() {
-    const honkho = { lat: 13.7615, lng: 109.2385 };
+    // 🏝️ Vị trí Hòn Khô - Quy Nhơn
+    const honKho = { lat: 13.8683, lng: 109.2826 };
 
     // Tạo bản đồ
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 12,
-      center: honkho,
+      zoom: 14,
+      center: honKho,
     });
 
-    // Thêm ghim (marker)
+    // Ghim (marker)
     new google.maps.Marker({
-      position: honkho,
+      position: honKho,
       map: map,
-      title: "Hon Kho, Quy Nhơn",
+      title: "Hòn Khô - Quy Nhơn",
     });
   }
 </script>
 
-<!-- 🧭 Gọi Google Maps JavaScript API -->
+<!-- 🧭 Gọi Google Maps API -->
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbhZOTVNIVpefOMiP5aPqN18S5EmzhGAo&callback=initMap">
 </script>
+
 
        <!-- FOOTER -->
   <footer class="qnt-footer">

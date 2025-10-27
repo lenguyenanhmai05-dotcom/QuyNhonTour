@@ -178,27 +178,29 @@
 
 <script>
   function initMap() {
-    const flc = { lat: 13.7615, lng: 109.2385 };
+    // 🏖️ Vị trí FLC Luxury Resort - Quy Nhơn
+    const flcResort = { lat: 13.9464, lng: 109.2457 };
 
     // Tạo bản đồ
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 12,
-      center: flc,
+      zoom: 15,
+      center: flcResort,
     });
 
-    // Thêm ghim (marker)
+    // Ghim (marker)
     new google.maps.Marker({
-      position: flc,
+      position: flcResort,
       map: map,
-      title: "FLC, Quy Nhơn",
+      title: "FLC Luxury Resort - Quy Nhơn",
     });
   }
 </script>
 
-<!-- 🧭 Gọi Google Maps JavaScript API -->
+<!-- 🧭 Gọi Google Maps API -->
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbhZOTVNIVpefOMiP5aPqN18S5EmzhGAo&callback=initMap">
 </script>
+
 
     <!-- FOOTER -->
     <footer class="qnt-footer">
