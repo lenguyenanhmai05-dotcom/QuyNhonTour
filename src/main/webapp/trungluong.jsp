@@ -20,7 +20,7 @@
       <nav class="nav">
           <a href="index.jsp">Home</a>
           <a href="tours.jsp" class="active">Tours</a>
-          <a href="about.jsp">About</a>
+          <a href="aboutus.html">About</a>
           <% if (userEmail != null) { %>
               <span class="gmail">📧 <%= userEmail %></span>
           <% } else { %>
@@ -156,9 +156,65 @@
         <b>Click <strong>“Book Tour Now”</strong> to experience the magnificent beauty of Quy Nhon’s sea —
         where adventure meets tranquility at Trung Luong! 🌊✨</b>
       </p>
-      <h3>2.000.000 VND/person</h3>
-      <button class="book-btn">Book Now</button>
+         <div class="price-box">
+    <div class="price-item adult">
+      <h4>👨‍👩‍👧 Adult Price</h4>
+      <p><strong>2.000.000 VNĐ / person</strong></p>
     </div>
+    <div class="price-item child">
+      <h4>🧒 Child Price</h4>
+      <p><strong>1.480.000 VNĐ / child (free for children under 2 years old)</strong></p>
+    </div>
+  </div>
+
+  <button class="book-btn">Book Now</button>
+</div>
+
+
+
+<!-- GOOGLE MAPS SECTION -->
+<section class="map-section">
+  <h2>📍 Tour Location — Trung Luong, Quy Nhơn</h2>
+  <div id="map"></div>
+</section>
+
+<style>
+  .map-section {
+    margin: 60px auto;
+    text-align: center;
+  }
+  #map {
+    width: 90%;
+    height: 450px;
+    border-radius: 12px;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+</style>
+
+<script>
+  function initMap() {
+    const trungluong = { lat: 13.7615, lng: 109.2385 };
+
+    // Tạo bản đồ
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 12,
+      center: trungluong,
+    });
+
+    // Thêm ghim (marker)
+    new google.maps.Marker({
+      position: trungluong,
+      map: map,
+      title: "Trung Luong, Quy Nhơn",
+    });
+  }
+</script>
+
+<!-- 🧭 Gọi Google Maps JavaScript API -->
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbhZOTVNIVpefOMiP5aPqN18S5EmzhGAo&callback=initMap">
+</script>
 
     <footer class="qnt-footer">
       <div class="footer-inner">

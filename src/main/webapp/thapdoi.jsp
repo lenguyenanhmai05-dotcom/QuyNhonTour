@@ -20,7 +20,7 @@
       <nav class="nav">
           <a href="index.jsp">Home</a>
           <a href="tours.jsp" class="active">Tours</a>
-          <a href="about.jsp">About</a>
+          <a href="aboutus.html">About</a>
           <% if (userEmail != null) { %>
               <span class="gmail">📧 <%= userEmail %></span>
           <% } else { %>
@@ -76,7 +76,7 @@
 
       <div class="card">
         <h3>1 DAY</h3>
-        <p><strong>  ⏰ Time: Morning or afternoon (about 3-4 hours)</strong>
+        <p><strong>  ⏰ Time: Morning - Afternoon</strong>
 <br>- 08:00 / 14:00 – Pick up guests at Quy Nhon city center.
 <br>- 08:15 / 14:15 – Travel to Twin Towers (about 3km from the center).
 <br>- 08:30 / 14:30 – Visit Twin Towers: Learn about ancient Champa architecture.
@@ -143,9 +143,67 @@
   <p>
     <b>Click <strong>“Book Tour Now”</strong> The Twin Towers are not only a cultural destination, but also a place for you to calm down in the midst of modern life, feeling the breath of an ancient civilization that once flourished in Binh Dinh.! 🌊✨</b>
   </p>
-  <h3>670.000 VND/person</h3>
+  
+    <div class="price-box">
+    <div class="price-item adult">
+      <h4>👨‍👩‍👧 Adult Price</h4>
+      <p><strong>770.000 VNĐ / person</strong></p>
+    </div>
+    <div class="price-item child">
+      <h4>🧒 Child Price</h4>
+      <p><strong>470.000 VNĐ / child (free for children under 2 years old)</strong></p>
+    </div>
+  </div>
+
   <button class="book-btn">Book Now</button>
 </div>
+
+
+
+<!-- GOOGLE MAPS SECTION -->
+<section class="map-section">
+  <h2>📍 Tour Location — Twin Towers, Quy Nhơn</h2>
+  <div id="map"></div>
+</section>
+
+<style>
+  .map-section {
+    margin: 60px auto;
+    text-align: center;
+  }
+  #map {
+    width: 90%;
+    height: 450px;
+    border-radius: 12px;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+</style>
+
+<script>
+  function initMap() {
+    // 🗺️ Vị trí Ky Co - Eo Gio (gần Quy Nhơn)
+    const twintowers = { lat: 13.7615, lng: 109.2385 };
+
+    // Tạo bản đồ
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 12,
+      center: twintowers,
+    });
+
+    // Thêm ghim (marker)
+    new google.maps.Marker({
+      position: twintowers,
+      map: map,
+      title: "Twin Towers, Quy Nhơn",
+    });
+  }
+</script>
+
+<!-- 🧭 Gọi Google Maps JavaScript API -->
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbhZOTVNIVpefOMiP5aPqN18S5EmzhGAo&callback=initMap">
+</script>
 
        <!-- FOOTER -->
   <footer class="qnt-footer">
