@@ -11,6 +11,7 @@ com\quynhontours\model\Tour.class
 com\quynhontours\controller\BookNowServlet.class
 com\quynhontours\controller\RegisterServlet.class
 com\quynhontours\controller\SendForgotOtpController.class
+com\quynhontours\controller\ChatServlet.class
 com\quynhontours\controller\SearchTourServlet.class
 com\quynhontours\controller\TourDetailsServlet.class
 com\quynhontours\controller\VerifyOtpController.class
@@ -19,6 +20,7 @@ com\quynhontours\service\OtpService$OtpEntry.class
 com\quynhontours\dao\UserDAO.class
 com\quynhontours\controller\UpdateTourServlet.class
 com\quynhontours\controller\ResetPasswordController.class
+com\quynhontours\service\TourService.class
 com\quynhontours\controller\RemoveFromCartServlet.class
 com\quynhontours\controller\VerifyResetOtpController.class
 com\quynhontours\utils\MongoDBConnection.class
@@ -27,3 +29,4 @@ com\quynhontours\model\User.class
 com\quynhontours\controller\TourListServlet.class
 com\quynhontours\dao\TourDAO.class
 com\quynhontours\controller\LogoutServlet.class
+com\quynhontours\service\TourServiceImpl.class
