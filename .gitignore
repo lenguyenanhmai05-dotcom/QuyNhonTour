@@ -1,0 +1,63 @@
+/target/
+# =========================
+# Java, Maven, JSP/Servlet
+# =========================
+
+# Maven build output
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+*.log
+*.out
+
+# IDE configs
+# --- IntelliJ IDEA ---
+.idea/
+*.iml
+*.iws
+out/
+
+# --- Eclipse / STS ---
+.project
+.classpath
+.settings/
+bin/
+.tmp/
+
+# --- VS Code ---
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Server / Tomcat generated files
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# Local properties
+*.properties.local
+*.env
+*.secret
+
+# JetBrains Fleet / NetBeans
+.fleet/
+nbproject/private/
+build/
+dist/
+
+# Node (nếu bạn có phần front-end trong cùng dự án)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# --------------------------
+# Optional: Nếu bạn dùng Docker
+# --------------------------
+/docker-compose.override.yml
+/.env
