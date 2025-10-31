@@ -172,11 +172,6 @@
     <servlet-class>com.quynhontours.controller.ChatServlet</servlet-class>
 </servlet>
 
-<servlet-mapping>
-    <servlet-name>ChatServlet</servlet-name>
-    <url-pattern>/chat</url-pattern>
-</servlet-mapping>
-
 <servlet>
     <servlet-name>AddToCartServlet</servlet-name>
     <servlet-class>com.quynhontours.controller.AddToCartServlet</servlet-class>
@@ -221,6 +216,11 @@
 <context-param>
     <param-name>smtpHost</param-name>
     <param-value>smtp.gmail.com</param-value>
+</context-param>
+
+<context-param>
+  <param-name>OPENAI_API_KEY</param-name>
+  <param-value>${OPENAI_API_KEY}</param-value>
 </context-param>
 
 
