@@ -22,7 +22,7 @@ public class ChatServlet extends HttpServlet {
         super.init();
         // ⚠️ KHÔNG nên hardcode API key trong code thật.
         // Dưới đây chỉ là ví dụ, bạn nên chuyển sang System.getenv("OPENAI_API_KEY")
-        String apiKey = "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";
+        String apiKey = "";
 
         openAIClient = OpenAIOkHttpClient.builder()
                 .apiKey(apiKey)

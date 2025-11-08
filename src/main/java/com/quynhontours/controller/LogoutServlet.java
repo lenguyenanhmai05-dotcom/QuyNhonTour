@@ -10,11 +10,13 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        // Hủy session hiện tại (nếu có)
         HttpSession session = req.getSession(false);
         if (session != null) {
             session.invalidate();
         }
 
-        resp.sendRedirect("index.jsp");
+        // Chuyển hướng về trang login.jsp ở thư mục gốc
+        resp.sendRedirect(req.getContextPath() + "/login.jsp");
     }
 }

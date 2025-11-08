@@ -13,10 +13,9 @@
 <main class="hero">
   <div class="hero-content">
     <h1>
-      Discover the beauty of Quy Nhon 
-      <span class="palm">🌴</span>
+       Touch the Wild Beauty 🐳
     </h1>
-    <p>Experience blue sea, white sand, and golden sunshine with QuyNhonTour!</p>
+    <p>Are you ready for an emotional getaway to the coastal city of Quy Nhơn? With QuyNhonTour, we’ll explore crystal-clear beaches, majestic rocky shores, and peaceful moments immersed in nature’s charm..!</p>
     <a href="tour.jsp" class="explore-btn">Explore Now</a>
   </div>
 </main>
@@ -178,55 +177,8 @@
   </div>
 </section>
 
-<footer class="footer">
-  <div class="footer-container">
+<jsp:include page="footer.jsp" />
 
-    <!-- BRAND + SLOGAN -->
-    <div class="footer-brand">
-      <h2>QuyNhonTour</h2>
-      <p>Discover the beauty of Quy Nhơn with us.</p>
-    </div>
-
-    <!-- QUICK LINKS -->
-    <div class="footer-links">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Tours</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
-
-    <!-- CONTACT INFO -->
-    <div class="footer-contact">
-      <h3>Contact</h3>
-      <p><i class="fa-solid fa-envelope"></i> quynhontour@gmail.com</p>
-      <p><i class="fa-solid fa-phone"></i> +84 384 757 752</p>
-      <p><i class="fa-solid fa-location-dot"></i> Quy Nhơn - Gia Lai</p>
-    </div>
-
-    <!-- NEWSLETTER -->
-    <div class="footer-newsletter">
-      <h3>Stay Updated</h3>
-      <p>Subscribe to get the latest travel deals and news.</p>
-      <form>
-        <input type="email" placeholder="Enter your email" required>
-        <button type="submit">Subscribe</button>
-      </form>
-      <div class="social-icons">
-        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p>© 2025 QuyNhonTour. All rights reserved.</p>
-  </div>
-</footer>
 
 <jsp:include page="chatbox.jsp" />
 

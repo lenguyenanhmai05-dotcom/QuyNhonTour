@@ -1,174 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 /* ===== Reset & Fonts ===== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background: linear-gradient(135deg, #e0f7fa, #ffffff, #cce7ff);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  font-family: 'Poppins', 'Segoe UI Emoji', 'Noto Color Emoji', 'Apple Color Emoji', sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff, #cce7ff);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ===== Navbar ===== */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(90deg, #007BFF, #00BFFF);
-    padding: 15px 60px;
-    color: white;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
 
-.logo a {
-    text-decoration: none;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: white;
-    font-family: "Brush Script MT", cursive;
-}
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #f5f5f5;
-}
-
-/* ===== User Section ===== */
-.user-section {
-    display: flex;
-    align-items: center;
-}
-
-.btn {
-    background: white;
-    color: #007BFF;
-    padding: 6px 14px;
-    border-radius: 20px;
-    margin-left: 10px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: #cce7ff;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: white;
-}
-
-.user-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-}
-
-.username {
-    font-weight: 500;
-}
-
-.admin-link {
-    background: white;
-    color: #007BFF;
-    text-decoration: none;
-    padding: 4px 10px;
-    border-radius: 10px;
-    font-size: 0.9em;
-}
-
-.admin-link:hover {
-    background: #cce7ff;
-}
-
-.logout-btn {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 10px;
-    font-size: 0.9em;
-}
-
-.logout-btn:hover {
-    text-decoration: underline;
-}
-
-/* ===== Hero Section ===== */
+/* 🌊 Hero Section - Ocean Vibe */
 .hero {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
-    color: white;
-    position: relative;
-    height: 75vh; /* 👈 giảm chiều cao xuống để search box nằm vừa trong khung hình */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+  color: white;
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
 }
 
+/* Lớp phủ mờ để chữ nổi rõ hơn */
 .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 70, 0.3);
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 50, 100, 0.45);
+  backdrop-filter: blur(2px);
 }
 
+/* Nội dung hero */
 .hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 700px;
-    animation: fadeIn 1.5s ease-in-out;
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+  padding: 0 25px;
+  animation: fadeInUp 1.5s ease;
 }
 
-.hero-content h1 {
-  font-size: 3em;
-  margin-bottom: 15px;
-  line-height: 1.2;
+/* Tiêu đề */
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  animation: floatText 3s ease-in-out infinite alternate;
 }
 
-.hero-content .palm {
-  display: block; /* 👈 khiến cây dừa xuống hàng riêng */
-  text-align: center; /* 👈 căn giữa cùng hàng với chữ trên */
-  margin-top: 5px; /* 👈 cách nhẹ phía trên */
+/* Mô tả */
+.hero p {
+  font-size: 1.25rem;
+  color: #f0f8ff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  margin-bottom: 50px; /* 👈 tăng khoảng cách xuống (từ 35px lên 50px) */
+  margin-top: 10px;    /* 👈 thêm chút khoảng trống phía trên */
+  line-height: 1.6;
 }
 
-.hero-content p {
-    font-size: 1.2em;
-}
 
+/* Nút Explore */
 .explore-btn {
-    display: inline-block;
-    background: linear-gradient(90deg, #00BFFF, #007BFF);
-    color: white;
-    text-decoration: none;
-    padding: 12px 32px;
-    border-radius: 40px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-    font-size: 1.05em;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
-    transition: all 0.35s ease;
-    margin-top: 25px;
+  display: inline-block;
+  background: linear-gradient(90deg, #00BFFF, #007BFF);
+  color: white;
+  text-decoration: none;
+  padding: 14px 40px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+  transition: all 0.35s ease;
 }
 
 .explore-btn:hover {
-    background: linear-gradient(90deg, #0099e6, #0066ff);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.55);
+  background: linear-gradient(90deg, #0099e6, #0066ff);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 123, 255, 0.55);
 }
+
+/* Hiệu ứng xuất hiện */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hiệu ứng chữ nhấp nhô nhẹ */
+@keyframes floatText {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+
 
 /* ===== SEARCH TOUR ===== */
 .search-tour {
@@ -516,128 +462,3 @@ body {
 }
 
 
-.footer {
-  background: linear-gradient(135deg, #1f66c3, #8abff8);
-  color: #fff;
-  padding: 60px 10%;
-  font-family: "Poppins", sans-serif;
-  position: relative;
-}
-
-.footer-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 40px;
-  justify-content: space-between;
-}
-
-.footer-brand h2 {
-  font-size: 26px;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.footer-brand p {
-  font-size: 15px;
-  line-height: 1.6;
-  color: #e0e0e0;
-}
-
-.footer-links h3,
-.footer-contact h3,
-.footer-newsletter h3 {
-  margin-bottom: 15px;
-  font-size: 18px;
-  color: #fff;
-}
-
-.footer-links ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-links ul li {
-  margin: 8px 0;
-}
-
-.footer-links ul li a {
-  color: #e0e0e0;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.footer-links ul li a:hover {
-  color: #fff;
-}
-
-.footer-contact p {
-  margin: 6px 0;
-  font-size: 15px;
-  color: #e0e0e0;
-}
-
-.footer-contact i {
-  margin-right: 8px;
-  color: #ffd700;
-}
-
-.footer-newsletter p {
-  font-size: 14px;
-  color: #e0e0e0;
-  margin-bottom: 10px;
-}
-
-.footer-newsletter form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-newsletter input {
-  padding: 10px 12px;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-  font-size: 14px;
-}
-
-.footer-newsletter button {
-  background: #ffd700;
-  color: #000;
-  border: none;
-  padding: 10px 12px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.footer-newsletter button:hover {
-  background: #fff;
-  color: #007bff;
-}
-
-.social-icons {
-  margin-top: 15px;
-}
-
-.social-icons a {
-  color: #fff;
-  font-size: 18px;
-  margin-right: 12px;
-  transition: all 0.3s ease;
-}
-
-.social-icons a:hover {
-  color: #ffd700;
-  transform: scale(1.15);
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-  font-size: 14px;
-  color: #d0d0d0;
-}

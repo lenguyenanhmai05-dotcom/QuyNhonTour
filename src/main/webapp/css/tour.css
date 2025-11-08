@@ -1,105 +1,15 @@
-/* ------------------------------
-   RESET & BODY
---------------------------------*/
+/* ===== Reset & Fonts ===== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  color: #222;
-  line-height: 1.6;
-  background: linear-gradient(to bottom, #63a4ff, #fddb92 50%, #fff 95%);
-  background-attachment: fixed;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInPage 1.2s ease-out forwards;
-}
-
-@keyframes fadeInPage {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ------------------------------
-   HEADER
---------------------------------*/
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 50px;
-  background: linear-gradient(90deg, #6cb6ff, #4a90e2);
-  color: white;
-}
-
-.logo {
-  font-family: "Brush Script MT", cursive;
-  font-size: 30px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-}
-
-nav {
-  display: flex;
-  gap: 20px;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-nav a:hover {
-  text-decoration: underline;
-}
-
-.user-section {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: white;
-}
-
-.user-email {
-  font-weight: 500;
-}
-
-.user-section a {
-  color: #f0f0f0;
-  text-decoration: none;
-}
-
-.user-section a:hover {
-  text-decoration: underline;
-}
-
-
-.signin-btn {
-  margin-left: 16px;
-  padding: 8px 18px;
-  border: 2px solid #007bff;
-  border-radius: 25px;
-  background: transparent;
-  color: #007bff;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.signin-btn:hover {
-  background: #007bff;
-  color: #fff;
+    background: linear-gradient(135deg, #e0f7fa, #ffffff, #cce7ff);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ------------------------------
@@ -307,69 +217,4 @@ nav a:hover {
 .tour-btns .book::before {
   content: "🛒";
   font-size: 16px;
-}
-
-
-/* ------------------------------
-   FOOTER
---------------------------------*/
-.qnt-footer {
-  background: #346ebf;
-  color: white;
-  padding: 35px 80px;
-  margin-top: 80px;
-}
-
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.footer-links a {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 18px;
-  font-weight: 500;
-  transition: opacity 0.3s;
-}
-
-.footer-links a:hover {
-  opacity: 0.7;
-}
-
-.brand-name {
-  font-weight: 700;
-  font-size: 20px;
-}
-
-.copyright {
-  display: block;
-  font-size: 13px;
-  opacity: 0.8;
-}
-
-/* ------------------------------
-   RESPONSIVE
---------------------------------*/
-@media (max-width: 600px) {
-  .footer-inner {
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
-  }
-
-  .footer-links {
-    gap: 20px;
-  }
-
-  .tour-card img {
-    height: 180px;
-  }
-
-  .tour-btns {
-    flex-direction: column;
-    gap: 10px;
-  }
 }

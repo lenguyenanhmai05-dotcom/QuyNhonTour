@@ -33,6 +33,94 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
+<servlet>
+    <servlet-name>DashboardServlet</servlet-name>
+    <servlet-class>com.quynhontours.controller.DashboardServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>DashboardServlet</servlet-name>
+    <url-pattern>/admin/dashboard</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>BookingServlet</servlet-name>
+    <servlet-class>com.quynhontours.controller.BookingServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>BookingServlet</servlet-name>
+    <url-pattern>/BookingServlet</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>AdminBookingServlet</servlet-name>
+    <servlet-class>com.quynhontours.controller.AdminBookingServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>AdminBookingServlet</servlet-name>
+    <url-pattern>/admin-bookings</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+    <servlet-name>BookingHistoryServlet</servlet-name>
+    <servlet-class>com.quynhontours.controller.BookingHistoryServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>BookingHistoryServlet</servlet-name>
+    <url-pattern>/booking-history</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>PaymentServlet</servlet-name>
+    <servlet-class>com.quynhontours.controller.PaymentServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>PaymentServlet</servlet-name>
+    <url-pattern>/payment</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>PaymentConfirmServlet</servlet-name>
+    <servlet-class>com.quynhontours.controller.PaymentConfirmServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>PaymentConfirmServlet</servlet-name>
+    <url-pattern>/payment-confirm</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>OnlinePayCallbackServlet</servlet-name>
+    <servlet-class>com.quynhontours.controller.OnlinePayCallbackServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>OnlinePayCallbackServlet</servlet-name>
+    <url-pattern>/online-pay-callback</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>UpdatePaymentServlet</servlet-name>
+    <servlet-class>com.quynhontours.controller.UpdatePaymentServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>UpdatePaymentServlet</servlet-name>
+    <url-pattern>/update-payment</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>NewsServlet</servlet-name>
+    <servlet-class>com.quynhontours.controller.NewsServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>NewsServlet</servlet-name>
+    <url-pattern>/admin/news</url-pattern>
+</servlet-mapping>
+
+
     <!-- === Tour Management === -->
 <servlet>
     <servlet-name>TourServlet</servlet-name>
@@ -180,16 +268,6 @@
 <servlet-mapping>
     <servlet-name>AddToCartServlet</servlet-name>
     <url-pattern>/AddToCartServlet</url-pattern>
-</servlet-mapping>
-
-<servlet>
-    <servlet-name>BookNowServlet</servlet-name>
-    <servlet-class>com.quynhontours.controller.BookNowServlet</servlet-class>
-</servlet>
-
-<servlet-mapping>
-    <servlet-name>BookNowServlet</servlet-name>
-    <url-pattern>/BookNowServlet</url-pattern>
 </servlet-mapping>
 
 

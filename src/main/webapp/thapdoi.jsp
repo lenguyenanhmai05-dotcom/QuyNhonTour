@@ -14,22 +14,7 @@
 </head>
 
 <body>
-  <!-- HEADER -->
-    <header class="header">
-      <div class="logo">🌊QuyNhonTour</div>
-      <nav class="nav">
-          <a href="index.jsp">Home</a>
-          <a href="tours.jsp" class="active">Tours</a>
-          <a href="aboutus.html">About</a>
-          <% if (userEmail != null) { %>
-              <span class="gmail">📧 <%= userEmail %></span>
-          <% } else { %>
-              <a href="login.jsp">Login</a>
-              <button class="signin-btn" onclick="location.href='signup.jsp'">Sign up</button>
-          <% } %>
-      </nav>
-  </header>
-
+  <jsp:include page="header.jsp" />
 
   <!-- MAIN -->
   <main class="poster">
@@ -155,7 +140,13 @@
     </div>
   </div>
 
-  <button class="book-btn">Book Now</button>
+  <form action="booking.jsp" method="get">
+    <input type="hidden" name="tourName" value="The Twin Towers Tour"/>
+    <input type="hidden" name="tourImage" value="images/thapdoi1.jpg"/>
+    <input type="hidden" name="adultPrice" value="770000"/>
+    <input type="hidden" name="childPrice" value="470000"/>
+    <button type="submit" class="book-btn">Book Now</button>
+</form>
 </div>
 
 
@@ -195,7 +186,7 @@
     new google.maps.Marker({
       position: thapDoi,
       map: map,
-      title: "Tháp Đôi - Quy Nhơn",
+      title: "Thap Doi - Quy Nhon",
     });
   }
 </script>
@@ -206,21 +197,8 @@
 </script>
 
 
-       <!-- FOOTER -->
-  <footer class="qnt-footer">
-    <div class="footer-inner">
-      <div class="brand">
-        <span class="brand-name">QuyNhonTour</span>
-        <small class="copyright">©2025 QuyNhonTour. All rights reserved.</small>
-      </div>
-      <nav class="footer-links">
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#">Support</a>
-      </nav>
-    </div>
-  </footer>
 
   </main>
+  <jsp:include page="footer.jsp" />
 </body>
 </html>

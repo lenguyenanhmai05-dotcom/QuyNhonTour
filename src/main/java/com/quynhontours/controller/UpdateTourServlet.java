@@ -37,8 +37,8 @@ public class UpdateTourServlet extends HttpServlet {
             String duration = request.getParameter("duration");
             String startDate = request.getParameter("startDate");
             String endDate = request.getParameter("endDate");
-            String priceAdultStr = request.getParameter("priceAdult");
-            String priceChildStr = request.getParameter("priceChild");
+            String priceAdultStr = request.getParameter("adultPrice");
+            String priceChildStr = request.getParameter("childPrice");
             String image = request.getParameter("image");
 
             double priceAdult = 0;

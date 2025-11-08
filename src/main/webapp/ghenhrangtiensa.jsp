@@ -13,21 +13,7 @@
   <link rel="stylesheet" href="css/honkho.css">
 </head>
 <body>
-  <!-- HEADER -->
-    <header class="header">
-      <div class="logo">🌊QuyNhonTour</div>
-      <nav class="nav">
-          <a href="index.jsp">Home</a>
-          <a href="tours.jsp" class="active">Tours</a>
-          <a href="aboutus.html">About</a>
-          <% if (userEmail != null) { %>
-              <span class="gmail">📧 <%= userEmail %></span>
-          <% } else { %>
-              <a href="login.jsp">Login</a>
-              <button class="signin-btn" onclick="location.href='signup.jsp'">Sign up</button>
-          <% } %>
-      </nav>
-  </header>
+  <jsp:include page="header.jsp" />
 
 <main class="poster">
     <section class="hero">
@@ -149,7 +135,13 @@
     </div>
   </div>
 
-  <button class="book-btn">Book Now</button>
+  <form action="booking.jsp" method="get">
+    <input type="hidden" name="tourName" value="Ghenh Rang Tien Sa Tour"/>
+    <input type="hidden" name="tourImage" value="images/ghenhrangtiensa1.jpg"/>
+    <input type="hidden" name="adultPrice" value="800000"/>
+    <input type="hidden" name="childPrice" value="500000"/>
+    <button type="submit" class="book-btn">Book Now</button>
+</form>
 </div>
 
 
@@ -199,22 +191,8 @@
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbhZOTVNIVpefOMiP5aPqN18S5EmzhGAo&callback=initMap">
 </script>
 
-       <!-- FOOTER -->
-  <footer class="qnt-footer">
-    <div class="footer-inner">
-      <div class="brand">
-        <span class="brand-name">QuyNhonTour</span>
-        <small class="copyright">©2025 QuyNhonTour. All rights reserved.</small>
-      </div>
-      <nav class="footer-links">
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#">Support</a>
-      </nav>
-    </div>
-  </footer>
-
   </main>
+  <jsp:include page="footer.jsp" />
 </body>
 </html>
  
