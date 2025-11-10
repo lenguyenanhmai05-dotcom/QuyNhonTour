@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<div class="sidebar">
+<!-- <div class="sidebar">
     <h2>🧭 Admin Panel</h2>
     <a href="dashboard">🏠 Dashboard</a>
     <a href="tour-list.jsp">📍 Tours Management</a>
@@ -27,7 +27,7 @@
     <a href="users-list.jsp">👤 Users Management</a>
     <a href="orders-list.jsp">👤 Orders Management</a>
     <a href="admin-booking.jsp" class="active">📦 Bookings Management</a>
-</div>
+</div> -->
 
 <div class="main">
     <div class="header">
