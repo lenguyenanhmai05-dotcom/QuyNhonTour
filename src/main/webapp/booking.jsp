@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="includes/header.jsp" %>
 <%
     String tourName = request.getParameter("tourName");
     String tourImage = request.getParameter("tourImage");
@@ -23,13 +24,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Booking - <%= tourName %></title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
     body {
         font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #fdf6f0, #f9f9f9);
+        background: linear-gradient(180deg, #fff8f3, #fffdfb);
         margin: 0;
-        padding: 40px 0;
+        padding: 40px 0 80px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #1e293b;
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 40px;
     }
 
     .booking-wrapper {
@@ -56,6 +66,13 @@
         padding: 25px;
         text-align: center;
         box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .info-top {
+        flex-grow: 1;
     }
 
     .info-section img {
@@ -67,19 +84,31 @@
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    h1 {
-        text-align: center;
-        color: #2c3e50;
-        font-size: 28px;
+    .price-info p {
+        margin: 6px 0;
+        font-size: 16px;
+        color: #374151;
+    }
+
+    .price-info strong {
+        color: #1e293b;
+    }
+
+    .total-box {
+        border-top: 1px solid #eee;
+        margin-top: 20px;
+        padding-top: 20px;
+        font-size: 18px;
         font-weight: 600;
-        margin-bottom: 35px;
+        color: #e74c3c;
+        text-align: right;
     }
 
     label {
         font-weight: 600;
         display: block;
         margin: 15px 0 5px;
-        color: #34495e;
+        color: #374151;
     }
 
     input, select {
@@ -92,9 +121,9 @@
     }
 
     input:focus, select:focus {
-        border-color: #3498db;
+        border-color: #2563eb;
         outline: none;
-        box-shadow: 0 0 4px rgba(52,152,219,0.3);
+        box-shadow: 0 0 4px rgba(37,99,235,0.3);
     }
 
     .counter-group {
@@ -109,7 +138,7 @@
         height: 32px;
         border-radius: 50%;
         border: none;
-        background: #3498db;
+        background: #2563eb;
         color: #fff;
         font-size: 18px;
         cursor: pointer;
@@ -117,25 +146,19 @@
     }
 
     .counter-group button:hover {
-        background: #2179c8;
+        background: #1d4ed8;
     }
 
     .counter-group input {
         width: 60px;
         text-align: center;
-    }
-
-    .total-price {
-        font-size: 18px;
-        font-weight: 600;
-        color: #e74c3c;
-        margin-top: 25px;
-        text-align: right;
+        border: 1px solid #ccc;
+        border-radius: 6px;
     }
 
     .confirm-btn {
         width: 100%;
-        background: #3498db;
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
         color: #fff;
         padding: 14px;
         border: none;
@@ -144,30 +167,26 @@
         font-weight: 600;
         margin-top: 30px;
         cursor: pointer;
+        box-shadow: 0 6px 16px rgba(37,99,235,0.25);
         transition: 0.3s;
     }
 
     .confirm-btn:hover {
-        background: #2179c8;
-    }
-
-    .price-info p {
-        margin: 8px 0;
-        font-size: 16px;
-    }
-
-    .price-info strong {
-        color: #2c3e50;
+        background: #1e40af;
+        transform: translateY(-2px);
     }
 
     @media(max-width: 900px){
         .booking-wrapper { flex-direction: column; }
+        .info-section { order: -1; }
+        .total-box { text-align: center; }
     }
 </style>
 </head>
 
 <body>
     <h1>Booking for <%= tourName %></h1>
+
     <div class="booking-wrapper">
         <!-- LEFT FORM -->
         <div class="form-section">
@@ -205,21 +224,27 @@
                     <option value="ONLINE">Online Payment</option>
                 </select>
 
-                <p class="total-price">Total: <span id="totalPrice">0</span> VNĐ</p>
                 <button type="submit" class="confirm-btn">Confirm Booking</button>
             </form>
         </div>
 
         <!-- RIGHT INFO -->
         <div class="info-section">
-            <img src="<%= tourImage %>" alt="<%= tourName %>">
-            <div class="price-info">
-                <p><strong>Tour:</strong> <%= tourName %></p>
-                <p><strong>Adult Price:</strong> <%= String.format("%,d", adultPrice) %> VNĐ / person</p>
-                <p><strong>Child Price:</strong> <%= String.format("%,d", childPrice) %> VNĐ / child</p>
+            <div class="info-top">
+                <img src="<%= tourImage %>" alt="<%= tourName %>">
+                <div class="price-info">
+                    <p><strong>Tour:</strong> <%= tourName %></p>
+                    <p><strong>Adult Price:</strong> <%= String.format("%,d", adultPrice) %> VNĐ / person</p>
+                    <p><strong>Child Price:</strong> <%= String.format("%,d", childPrice) %> VNĐ / child</p>
+                </div>
+            </div>
+            <div class="total-box">
+                Total: <span id="totalPrice">0</span> VNĐ
             </div>
         </div>
     </div>
+
+<%@ include file="includes/footer.jsp" %>
 
 <script>
 const adultPrice = Number('<%= adultPrice %>');
@@ -239,7 +264,6 @@ function updateTotal() {
     const total = adults * adultPrice + children * childPrice;
     document.getElementById("totalPrice").textContent = total.toLocaleString();
 }
-
 updateTotal();
 </script>
 </body>
