@@ -1,126 +1,221 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.quynhontours.model.Tour" %>
-    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-        <% Tour tour=(Tour) request.getAttribute("tour"); if (tour==null) {
-            response.sendRedirect(request.getContextPath() + "/admin/tours" ); return; } %>
-            <!DOCTYPE html>
-            <html>
 
-            <head>
-                <meta charset="UTF-8">
-                <title>Edit Tour</title>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        background: #f4f4f4;
-                        margin: 40px;
-                    }
+<%
+    Tour tour = (Tour) request.getAttribute("tour");
+    boolean editing = (tour != null);
+%>
 
-                    h2 {
-                        text-align: center;
-                    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title><%= editing ? "Edit Tour" : "Add New Tour" %></title>
+<link rel="stylesheet" href="../css/admin.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f3f6fb;
+        margin: 0;
+        padding: 0;
+        color: #2c3e50;
+    }
 
-                    form {
-                        max-width: 600px;
-                        margin: auto;
-                        background: white;
-                        padding: 20px;
-                        border-radius: 8px;
-                        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-                    }
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: linear-gradient(135deg, #3b82f6, #1e40af, #60a5fa);
+        color: #fff;
+        text-align: center;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
 
-                    label {
-                        display: block;
-                        margin-top: 10px;
-                    }
+    header h1 {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 600;
+    }
 
-                    input,
-                    textarea,
-                    select {
-                        width: 100%;
-                        padding: 8px;
-                        margin-top: 5px;
-                        border: 1px solid #ccc;
-                        border-radius: 4px;
-                    }
+    .logout-btn {
+        color: #fff;
+        text-decoration: none;
+        margin-top: 10px;
+        font-weight: 500;
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 6px 14px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
 
-                    button {
-                        background: #007bff;
-                        color: white;
-                        border: none;
-                        margin-top: 15px;
-                        padding: 10px 20px;
-                        border-radius: 4px;
-                        cursor: pointer;
-                    }
+    .logout-btn:hover {
+        background: rgba(255,255,255,0.2);
+    }
 
-                    button:hover {
-                        background: #0056b3;
-                    }
+    .form-container {
+        background: #fff;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 40px 50px;
+        border-radius: 14px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
 
-                    a {
-                        text-decoration: none;
-                        color: white;
-                        background: #6c757d;
-                        padding: 8px 15px;
-                        border-radius: 4px;
-                        margin-left: 10px;
-                    }
+    .form-container h2 {
+        text-align: center;
+        color: #2563eb;
+        margin-bottom: 25px;
+        font-size: 28px;
+    }
 
-                    a:hover {
-                        background: #5a6268;
-                    }
-                </style>
-            </head>
+    .form-group {
+        margin-bottom: 18px;
+    }
 
-            <body>
+    label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+    }
 
-                <h2>Edit Tour</h2>
+    input[type="text"],
+    input[type="number"],
+    textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border 0.2s ease;
+    }
 
-                <form action="<%=request.getContextPath()%>/admin/updateTour" method="post">
-                    <input type="hidden" name="id" value="<%=tour.getId()%>">
+    input:focus, textarea:focus {
+        border-color: #2563eb;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
 
-                    <label>Name:</label>
-                    <input type="text" name="name" value="<%=tour.getName()%>" required>
+    textarea {
+        resize: vertical;
+        min-height: 150px;
+    }
 
-                    <label>Description:</label>
-                    <textarea name="description" rows="3" required><%=tour.getDescription()%></textarea>
+    .btn-group {
+        text-align: center;
+        margin-top: 30px;
+    }
 
-                    <label>Location:</label>
-                    <input type="text" name="location" value="<%=tour.getLocation()%>" required>
+    .save-btn {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: #fff;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
 
-                    <label>Departure:</label>
-                    <input type="text" name="departure" value="Quy Nhon" readonly>
+    .save-btn:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    }
 
-                    <label>Destination:</label>
-                    <input type="text" name="destination" value="<%=tour.getDestination()%>" required>
+    .back-btn {
+        display: inline-block;
+        background: #e5e7eb;
+        color: #333;
+        padding: 12px 26px;
+        text-decoration: none;
+        border-radius: 8px;
+        margin-left: 10px;
+        transition: all 0.3s ease;
+    }
 
-                    <label>Tour duration:</label>
-                    <select name="duration">
-                        <option>1 day</option>
-                        <option>2 days 1 night</option>
-                        <option>3 days 2 nights</option>
-                        <option>4 days 3 nights</option>
-                    </select>
+    .back-btn:hover {
+        background: #d1d5db;
+        transform: translateY(-2px);
+    }
+</style>
+</head>
+<body>
 
-                    <label>Adult Price (VND):</label>
-                    <input type="number" name="adultPrice" step="0.01" value="<%=tour.getAdultPrice()%>" required>
+<header>
+    <h1><%= editing ? "Edit Tour" : "Add New Tour" %></h1>
+    <a href="<%= request.getContextPath().trim() %>/logout" class="logout-btn">Logout</a>
+</header>
 
-                    <label>Child Price (VND):</label>
-                    <input type="number" name="childPrice" step="0.01" value="<%=tour.getChildPrice()%>" required>
+<div class="form-container">
+    <form action="<%= request.getContextPath().trim() %><%= editing ? "/admin/updateTour" : "/admin/addTour" %>" method="post">
+        <% if (editing) { %>
+            <input type="hidden" name="id" value="<%= tour.getId() %>">
+        <% } %>
 
-                    <label>Start Date:</label>
-                    <input type="date" name="startDate" value="<%=tour.getStartDate()%>" required>
+        <div class="form-group">
+            <label>Tour Name</label>
+            <input type="text" name="name" value="<%= editing ? tour.getName() : "" %>" required>
+        </div>
 
-                    <label>End Date:</label>
-                    <input type="date" name="endDate" value="<%=tour.getEndDate()%>" required>
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" name="location" value="<%= editing ? tour.getLocation() : "" %>" required>
+        </div>
 
-                    <label>Image URL:</label>
-                    <input type="text" name="image" value="<%=tour.getImage()%>" required>
+        <div class="form-group">
+            <label>Departure</label>
+            <input type="text" name="departure" value="<%= editing ? tour.getDeparture() : "" %>">
+        </div>
 
-                    <button type="submit">Update Tour</button>
-                    <a href="<%=request.getContextPath()%>/admin/tours">Cancel</a>
-                </form>
+        <div class="form-group">
+            <label>Destination</label>
+            <input type="text" name="destination" value="<%= editing ? tour.getDestination() : "" %>">
+        </div>
 
-            </body>
+        <div class="form-group">
+            <label>Duration</label>
+            <input type="text" name="duration" value="<%= editing ? tour.getDuration() : "" %>">
+        </div>
 
-            </html>
+        <div class="form-group">
+            <label>Start Date</label>
+            <input type="text" name="startDate" value="<%= editing ? tour.getStartDate() : "" %>">
+        </div>
+
+        <div class="form-group">
+            <label>End Date</label>
+            <input type="text" name="endDate" value="<%= editing ? tour.getEndDate() : "" %>">
+        </div>
+
+        <div class="form-group">
+            <label>Adult Price</label>
+            <input type="number" step="0.01" name="adultPrice" value="<%= editing ? tour.getAdultPrice() : "" %>">
+        </div>
+
+        <div class="form-group">
+            <label>Child Price</label>
+            <input type="number" step="0.01" name="childPrice" value="<%= editing ? tour.getChildPrice() : "" %>">
+        </div>
+
+        <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" name="image" value="<%= editing ? tour.getImage() : "" %>">
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="description" required><%= editing ? tour.getDescription() : "" %></textarea>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="save-btn">💾 Save</button>
+            <a href="<%= request.getContextPath().trim() %>/admin/tour-list.jsp" class="back-btn">← Back</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

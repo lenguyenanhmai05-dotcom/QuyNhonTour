@@ -1,60 +1,63 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="com.quynhontours.model.Booking" %>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.quynhontours.dao.BookingDAO, com.quynhontours.model.Booking" %>
 <%
-    Booking booking = (Booking) request.getAttribute("booking");
-    if (booking == null) {
-        String paid = request.getParameter("paid");
-%>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Booking Result</title>
-    <style>
-        body { font-family: Arial; margin: 50px; background: #fafafa; }
-        .card { background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px #ccc; width: 400px; margin: auto; text-align:center; }
-        .paid { color: green; font-weight: bold; }
-        .pending { color: orange; font-weight: bold; }
-    </style>
-</head>
-<body>
-<div class="card">
-    <% if ("true".equals(paid)) { %>
-        <h2>🎉 Payment Successful!</h2>
-        <p class="paid">Your booking has been paid successfully.</p>
-        <p>We look forward to welcoming you on your Quy Nhon Tour!</p>
-    <% } else { %>
-        <h2>Booking Confirmed ✅</h2>
-        <p class="pending">Your booking is pending confirmation.</p>
-        <p>Our staff will contact you soon.</p>
-    <% } %>
-</div>
-</body>
-</html>
+    String bookingId = request.getParameter("bookingId");
+    String paid = request.getParameter("paid");
 
-<%
-        return;
+    Booking booking = null;
+    if (bookingId != null && !bookingId.isEmpty()) {
+        BookingDAO dao = new BookingDAO();
+        booking = dao.getById(bookingId); // dùng getById() đúng với BookingDAO
     }
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Booking Details</title>
+    <meta charset="UTF-8">
+    <title>Booking Status - Quy Nhon Tour</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial; margin: 50px; background: #fafafa; }
-        .card { background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px #ccc; width: 400px; margin: auto; }
-        .status { color: orange; font-weight: bold; }
+        body { font-family: 'Poppins', sans-serif; background: #f6f8fb; margin: 0; padding: 0; }
+        .container { max-width: 480px; background: #fff; margin: 80px auto; border-radius: 12px;
+                     box-shadow: 0 6px 18px rgba(0,0,0,0.1); text-align: center; padding: 40px; }
+        h2 { margin-bottom: 10px; }
+        .success { color: #27ae60; }
+        .pending { color: #f39c12; }
+        p { font-size: 16px; color: #555; margin: 6px 0; }
+        .btn-view { display: inline-block; margin-top: 20px; text-decoration: none;
+                    color: white; background: #3498db; padding: 10px 25px;
+                    border-radius: 8px; transition: 0.3s; }
+        .btn-view:hover { background: #2980b9; }
     </style>
 </head>
 <body>
-<div class="card">
-    <h2>Booking Received ✅</h2>
-    <p>Tour: <b><%= booking.getTourName() %></b></p>
-    <p>Guests: <%= booking.getGuests() %></p>
-    <p>Payment Method: <%= booking.getPaymentMethod() %></p>
-    <p>Status: <span class="status"><%= booking.getPaymentStatus() %></span></p>
-    <p>We will confirm your booking soon.</p>
+
+<div class="container">
+    <% if ("true".equals(paid)) { %>
+        <h2 class="success">🎉 Payment Successful!</h2>
+        <p>Your booking has been marked as <b>PAID</b>.</p>
+        <p>We look forward to welcoming you on your <b>Quy Nhon Tour</b>!</p>
+    <% } else if (booking != null) { %>
+        <h2>Booking Received ✅</h2>
+        <p><strong>Tour:</strong> <%= booking.getTourName() %></p>
+        <p><strong>Guests:</strong> <%= booking.getGuests() %></p>
+        <p><strong>Payment Method:</strong> <%= booking.getPaymentMethod() %></p>
+        <p>Status:
+            <% if ("PAID".equalsIgnoreCase(booking.getPaymentStatus())) { %>
+                <span class="success">PAID</span>
+            <% } else { %>
+                <span class="pending">Pending</span>
+            <% } %>
+        </p>
+    <% } else { %>
+        <h2 style="color:red;">⚠ Booking Not Found!</h2>
+        <p>Please check your booking again.</p>
+    <% } %>
+
+    <!-- Nút View My Bookings dẫn đến BookingHistoryServlet -->
+    <a href="BookingHistoryServlet" class="btn-view">View My Bookings</a>
 </div>
+
 </body>
 </html>

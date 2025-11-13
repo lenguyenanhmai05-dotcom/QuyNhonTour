@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
+  
   .site-footer {
     background: linear-gradient(135deg, #0077b6, #00b4d8);
     color: #fff;

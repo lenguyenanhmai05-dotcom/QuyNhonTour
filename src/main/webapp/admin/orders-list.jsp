@@ -1,83 +1,65 @@
-<%@ page import="org.bson.Document" %>
-    <%@ page import="java.util.List" %>
-        <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.quynhontours.dao.BookingDAO" %>
+<%@ page import="com.quynhontours.model.Booking" %>
+<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-            <% List<Document> orders = (List<Document>) request.getAttribute("orders");
-                    %>
+<%
+    BookingDAO dao = new BookingDAO();
+    List<Booking> orders = dao.getAllBookings();
+%>
 
-                    <!DOCTYPE html>
-                    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders Management</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
 
-                    <head>
-                        <meta charset="UTF-8">
-                        <title>Orders Management</title>
-                        <link rel="stylesheet" href="../css/admin.css">
-                    </head>
+<header>
+    <h1>Orders Management</h1>
+    <a href="<%= request.getContextPath() %>/logout" class="logout-btn">Logout</a>
+</header>
 
-                    <body>
+<div class="container">
+    <div class="top-btns">
+        <a href="dashboard" class="back-btn">← Back to Dashboard</a>
+    </div>
 
-                        <!-- <div class="sidebar">
-                            <h2>🧭 Admin Panel</h2>
-                            <a href="dashboard">🏠 Dashboard</a>
-                            <a href="tour-list.jsp">📍 Tours Management</a>
-                            <a href="news-list.jsp">📰 News Management</a>
-                            <a href="users-list.jsp">👤 Users Management</a>
-                            <a href="orders-list.jsp">👤 Orders Management</a>
-                            <a href="admin-booking.jsp" class="active">📦 Bookings Management</a>
-                        </div> -->
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Email</th>
+                <th>Tour</th>
+                <th>Payment</th>
+                <th>Order Status</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% if (orders != null && !orders.isEmpty()) { 
+            for (Booking o : orders) { %>
+            <tr>
+                <td><%= o.getId() %></td>
+                <td><%= o.getCustomerName() %></td>
+                <td><%= o.getCustomerEmail() %></td>
+                <td><%= o.getTourName() %></td>
+                <td><%= o.getPaymentStatus() %></td>
+                <td class="<%= "COMPLETED".equalsIgnoreCase(o.getOrderStatus()) ? "status-completed" : 
+                             "CANCELLED".equalsIgnoreCase(o.getOrderStatus()) ? "status-cancelled" : "status-processing" %>">
+                    <%= o.getOrderStatus() %>
+                </td>
+                <td><%= String.format("%,.0f₫", o.getTotalPrice()) %></td>
+            </tr>
+        <% } } else { %>
+            <tr><td colspan="7" style="text-align:center;">No orders found.</td></tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
 
-
-                        <div class="main">
-                            <div class="header">
-                                <h1>Orders List</h1>
-                                <a href="dashboard" class="back-btn">⬅ Back to Dashboard</a>
-                            </div>
-
-                            <div class="table-container">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Order ID</th>
-                                            <th>User Email</th>
-                                            <th>Tour Name</th>
-                                            <th>Status</th>
-                                            <th>Total</th>
-                                            <th>Created At</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% if (orders !=null && !orders.isEmpty()) { for (Document o : orders) { %>
-                                            <tr>
-                                                <td>
-                                                    <%= o.getObjectId("_id") %>
-                                                </td>
-                                                <td>
-                                                    <%= o.getString("userEmail") %>
-                                                </td>
-                                                <td>
-                                                    <%= o.getString("tourName") %>
-                                                </td>
-                                                <td>
-                                                    <%= o.getString("status") %>
-                                                </td>
-                                                <td>
-                                                    <%= o.getDouble("total") !=null ? String.format("%,.0f₫",
-                                                        o.getDouble("total")) : "-" %>
-                                                </td>
-                                                <td>
-                                                    <%= o.getString("createdAt") %>
-                                                </td>
-                                            </tr>
-                                            <% } } else { %>
-                                                <tr>
-                                                    <td colspan="6">No orders found.</td>
-                                                </tr>
-                                                <% } %>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                    </body>
-
-                    </html>
+</body>
+</html>

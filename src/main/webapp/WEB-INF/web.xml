@@ -58,8 +58,10 @@
 
 <servlet-mapping>
     <servlet-name>AdminBookingServlet</servlet-name>
-    <url-pattern>/admin-bookings</url-pattern>
+    <url-pattern>/admin/admin-booking</url-pattern>
 </servlet-mapping>
+
+
 
 
 <servlet>
@@ -69,18 +71,9 @@
 
 <servlet-mapping>
     <servlet-name>BookingHistoryServlet</servlet-name>
-    <url-pattern>/booking-history</url-pattern>
+    <url-pattern>/BookingHistoryServlet</url-pattern>
 </servlet-mapping>
 
-<servlet>
-    <servlet-name>PaymentServlet</servlet-name>
-    <servlet-class>com.quynhontours.controller.PaymentServlet</servlet-class>
-</servlet>
-
-<servlet-mapping>
-    <servlet-name>PaymentServlet</servlet-name>
-    <url-pattern>/payment</url-pattern>
-</servlet-mapping>
 
 <servlet>
     <servlet-name>PaymentConfirmServlet</servlet-name>
@@ -89,26 +82,9 @@
 
 <servlet-mapping>
     <servlet-name>PaymentConfirmServlet</servlet-name>
-    <url-pattern>/payment-confirm</url-pattern>
+    <url-pattern>/PaymentConfirmServlet</url-pattern>
 </servlet-mapping>
 
-<servlet>
-    <servlet-name>OnlinePayCallbackServlet</servlet-name>
-    <servlet-class>com.quynhontours.controller.OnlinePayCallbackServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>OnlinePayCallbackServlet</servlet-name>
-    <url-pattern>/online-pay-callback</url-pattern>
-</servlet-mapping>
-
-<servlet>
-    <servlet-name>UpdatePaymentServlet</servlet-name>
-    <servlet-class>com.quynhontours.controller.UpdatePaymentServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>UpdatePaymentServlet</servlet-name>
-    <url-pattern>/update-payment</url-pattern>
-</servlet-mapping>
 
 <servlet>
     <servlet-name>NewsServlet</servlet-name>
@@ -120,6 +96,34 @@
     <url-pattern>/admin/news</url-pattern>
 </servlet-mapping>
 
+<servlet>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>com.quynhontours.controller.UserServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/admin/users</url-pattern>
+</servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderStatusServlet</servlet-name>
+        <servlet-class>com.quynhontours.controller.OrderStatusServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OrderStatusServlet</servlet-name>
+        <url-pattern>/updateOrderStatus</url-pattern>
+    </servlet-mapping>
+
+        <servlet>
+        <servlet-name>OrderListServlet</servlet-name>
+        <servlet-class>com.quynhontours.controller.OrderListServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OrderListServlet</servlet-name>
+        <url-pattern>/admin/orders</url-pattern>
+    </servlet-mapping>
 
     <!-- === Tour Management === -->
 <servlet>
