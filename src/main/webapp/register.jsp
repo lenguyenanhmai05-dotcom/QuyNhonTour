@@ -19,7 +19,6 @@
       </div>
 
       <input type="email" name="email" placeholder="Enter your email" required>
-      <input type="tel" name="phone" placeholder="Enter your phone number" required>
       <input type="date" name="dob" required>
       <input type="password" name="password" placeholder="Create password" required>
       <input type="password" name="confirmPassword" placeholder="Confirm password" required>

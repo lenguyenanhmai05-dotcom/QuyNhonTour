@@ -10,23 +10,27 @@
 <body>
   <div class="login-container">
     <div class="login-box">
-      <h2>Login</h2>
+      <h2>Welcome Back</h2>
+      <p>Sign in to continue your adventure with <b>QuyNhonTour</b></p>
+
+      <div id="error-box" class="error"></div>
 
       <form action="login" method="post">
-        <input type="email" name="email" placeholder="Email" required />
+        <input type="email" name="email" placeholder="Email address" required />
         <input type="password" name="password" placeholder="Password" required />
-        <button type="submit" class="btn">Login</button>
+
+        <div class="options">
+          <label><input type="checkbox" name="remember" /> Remember me</label>
+          <a href="forgot-password.jsp">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn">Sign In</button>
+
+        <p class="alt-text">
+          Don’t have an account?
+          <a href="register.jsp">Create one</a>
+        </p>
       </form>
-
-      <div id="error-box" class="error" style="display:none;"></div>
-
-      <p class="alt-text">
-        <a href="forgot-password.jsp">Forgot password?</a>
-      </p>
-
-      <p class="alt-text">
-        Don’t have an account? <a href="register.jsp">Register now</a>
-      </p>
     </div>
   </div>
 
@@ -37,6 +41,9 @@
     if (params.get("error") === "invalid") {
       errorBox.style.display = "block";
       errorBox.textContent = "Invalid email or password.";
+    } else if (params.get("error") === "empty") {
+      errorBox.style.display = "block";
+      errorBox.textContent = "Please fill in both email and password.";
     }
   </script>
 </body>

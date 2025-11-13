@@ -22,7 +22,6 @@ public class VerifyOtpController extends HttpServlet {
         String email = (String) session.getAttribute("tempEmail");
         String firstName = (String) session.getAttribute("tempFirstName");
         String lastName = (String) session.getAttribute("tempLastName");
-        String phone = (String) session.getAttribute("tempPhone");
         String dob = (String) session.getAttribute("tempDob");
         String password = (String) session.getAttribute("tempPassword");
 
@@ -34,25 +33,20 @@ public class VerifyOtpController extends HttpServlet {
         boolean valid = otpService.validateOtp(email, otp);
 
         if (valid) {
-            // ✅ Khi OTP đúng → Lưu user vào MongoDB
             UserDAO userDAO = new UserDAO();
-
-            // Hash lại password trước khi lưu
             String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
-            User user = new User(firstName, lastName, email, phone, dob, hashed, "user");
+            // ✅ Use the 6-argument constructor (no phone)
+            User user = new User(firstName, lastName, email, dob, hashed, "user");
             boolean inserted = userDAO.insertUser(user);
 
             if (inserted) {
-                // Xóa OTP và dữ liệu tạm
                 session.removeAttribute("tempEmail");
                 session.removeAttribute("tempFirstName");
                 session.removeAttribute("tempLastName");
-                session.removeAttribute("tempPhone");
                 session.removeAttribute("tempDob");
                 session.removeAttribute("tempPassword");
 
-                // Gắn session login luôn
                 session.setAttribute("userEmail", email);
                 session.setAttribute("firstName", firstName);
                 session.setAttribute("role", "user");

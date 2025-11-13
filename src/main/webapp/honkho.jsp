@@ -13,22 +13,7 @@
     <link rel="stylesheet" href="css/honkho.css">
 </head>
 <body>
-    <!-- HEADER -->
-    <header class="header">
-        <div class="logo">🌊QuyNhonTour</div>
-        <nav class="nav">
-            <a href="index.jsp">Home</a>
-            <a href="tours.jsp" class="active">Tours</a>
-            <a href="about.jsp">About</a>
-            <% if (userEmail != null) { %>
-                <span class="gmail">📧 <%= userEmail %></span>
-            <% } else { %>
-                <a href="login.jsp">Login</a>
-                <button class="signin-btn" onclick="location.href='signup.jsp'">Sign up</button>
-            <% } %>
-        </nav>
-    </header>
-
+    <jsp:include page="header.jsp" />
     <!-- NỘI DUNG CHÍNH -->
     <main class="poster">
     <section class="hero">
@@ -148,7 +133,13 @@
     </div>
   </div>
 
-  <button class="book-btn">Book Now</button>
+  <form action="booking.jsp" method="get">
+    <input type="hidden" name="tourName" value="Hon Kho - Ky Co - Eo Gio Tour"/>
+    <input type="hidden" name="tourImage" value="images/honkho.jpg"/>
+    <input type="hidden" name="adultPrice" value="2980000"/>
+    <input type="hidden" name="childPrice" value="1480000"/>
+    <button type="submit" class="book-btn">Book Now</button>
+</form>
 </div>
 
 
@@ -188,7 +179,7 @@
     new google.maps.Marker({
       position: honKho,
       map: map,
-      title: "Hòn Khô - Quy Nhơn",
+      title: "Hon Kho - Quy Nhon",
     });
   }
 </script>
@@ -199,21 +190,8 @@
 </script>
 
 
-       <!-- FOOTER -->
-  <footer class="qnt-footer">
-    <div class="footer-inner">
-      <div class="brand">
-        <span class="brand-name">QuyNhonTour</span>
-        <small class="copyright">©2025 QuyNhonTour. All rights reserved.</small>
-      </div>
-      <nav class="footer-links">
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#">Support</a>
-      </nav>
-    </div>
-  </footer>
 
   </main>
+  <jsp:include page="footer.jsp" />
 </body>
 </html>

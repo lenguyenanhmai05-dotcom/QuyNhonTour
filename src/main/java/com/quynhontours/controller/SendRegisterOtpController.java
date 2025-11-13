@@ -15,7 +15,6 @@ public class SendRegisterOtpController extends HttpServlet {
         String email = request.getParameter("email");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
-        String phone = request.getParameter("phone");
         String dob = request.getParameter("dob");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
@@ -33,7 +32,6 @@ public class SendRegisterOtpController extends HttpServlet {
             session.setAttribute("tempEmail", email);
             session.setAttribute("tempFirstName", firstName);
             session.setAttribute("tempLastName", lastName);
-            session.setAttribute("tempPhone", phone);
             session.setAttribute("tempDob", dob);
             session.setAttribute("tempPassword", password);
             session.setAttribute("registerMode", true); // 🔑 để phân biệt với login OTP

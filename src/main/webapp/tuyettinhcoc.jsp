@@ -17,22 +17,7 @@
 
 <body>
 
-  <!-- HEADER -->
-    <header class="header">
-      <div class="logo">🌊QuyNhonTour</div>
-      <nav class="nav">
-          <a href="index.jsp">Home</a>
-          <a href="tours.jsp" class="active">Tours</a>
-          <a href="aboutus.html">About</a>
-          <% if (userEmail != null) { %>
-              <span class="gmail">📧 <%= userEmail %></span>
-          <% } else { %>
-              <a href="login.jsp">Login</a>
-              <button class="signin-btn" onclick="location.href='signup.jsp'">Sign up</button>
-          <% } %>
-      </nav>
-  </header>
-
+ <jsp:include page="header.jsp" />
 
   <main class="poster">
     <section class="hero">
@@ -161,14 +146,20 @@
     </div>
   </div>
 
-  <button class="book-btn">Book Now</button>
+<form action="booking.jsp" method="get">
+    <input type="hidden" name="tourName" value="Tuyet Tinh Coc Tour"/>
+    <input type="hidden" name="tourImage" value="images/tuyettinhcoc3.jpg"/>
+    <input type="hidden" name="adultPrice" value="1000000"/>
+    <input type="hidden" name="childPrice" value="500000"/>
+    <button type="submit" class="book-btn">Book Now</button>
+</form>
 </div>
 
 
 
 <!-- GOOGLE MAPS SECTION -->
 <section class="map-section">
-  <h2>📍 Tour Location — Tuyet Tinh Coc, Quy Nhơn</h2>
+  <h2>📍 Tour Location — Tuyet Tinh Coc, Quy Nhon</h2>
   <div id="map"></div>
 </section>
 
@@ -201,7 +192,7 @@
     new google.maps.Marker({
       position: tuyetTinhCoc,
       map: map,
-      title: "Tuyệt Tình Cốc - Quy Nhơn",
+      title: "Tuyet Tinh Coc - Quy Nhon",
     });
   }
 </script>
@@ -212,21 +203,9 @@
 </script>
 
 
-       <!-- FOOTER -->
-  <footer class="qnt-footer">
-    <div class="footer-inner">
-      <div class="brand">
-        <span class="brand-name">QuyNhonTour</span>
-        <small class="copyright">©2025 QuyNhonTour. All rights reserved.</small>
-      </div>
-      <nav class="footer-links">
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#">Support</a>
-      </nav>
-    </div>
-  </footer>
+
 
   </main>
+  <jsp:include page="footer.jsp" />
 </body>
 </html>

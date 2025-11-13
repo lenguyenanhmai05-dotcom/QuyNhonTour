@@ -22,23 +22,7 @@
 
 <body>
 
-<header>
-  <a href="index.jsp" class="logo">🌊QuyNhonTour</a>
-  <nav>
-    <a href="index.jsp">Home</a>
-    <a href="tour.jsp">Tours</a>
-    <a href="aboutus.html">About</a>
-  </nav>
-  <div class="user-section">
-    <% if (userEmail != null) { %>
-      <span class="user-email"><%= userEmail %></span>
-      <a href="logout.jsp">(Logout)</a>
-    <% } else { %>
-      <a href="login.jsp">Login</a> |
-      <a href="register.jsp">Sign up</a>
-    <% } %>
-  </div>
-</header>
+  <jsp:include page="header.jsp" />
 
 <main>
   <section class="hero">
@@ -100,19 +84,7 @@
   </section>
 </main>
 
-<footer class="qnt-footer">
-  <div class="footer-inner">
-    <div class="brand">
-      <span class="brand-name">QuyNhonTour</span>
-      <small class="copyright">©2025 QuyNhonTour. All rights reserved.</small>
-    </div>
-    <nav class="footer-links">
-      <a href="#">Terms</a>
-      <a href="#">Privacy</a>
-      <a href="#">Support</a>
-    </nav>
-  </div>
-</footer>
+<jsp:include page="footer.jsp" />
 
 </body>
 </html>

@@ -17,21 +17,7 @@
 
 <body>
 
-  <!-- HEADER -->
-    <header class="header">
-      <div class="logo">🌊QuyNhonTour</div>
-      <nav class="nav">
-          <a href="index.jsp">Home</a>
-          <a href="tours.jsp" class="active">Tours</a>
-          <a href="aboutus.html">About</a>
-          <% if (userEmail != null) { %>
-              <span class="gmail">📧 <%= userEmail %></span>
-          <% } else { %>
-              <a href="login.jsp">Login</a>
-              <button class="signin-btn" onclick="location.href='signup.jsp'">Sign up</button>
-          <% } %>
-      </nav>
-  </header>
+  <jsp:include page="header.jsp" />
 
 
   <main class="poster">
@@ -180,14 +166,20 @@
     </div>
   </div>
 
-  <button class="book-btn">Book Now</button>
+  <form action="booking.jsp" method="get">
+    <input type="hidden" name="tourName" value="Tay Son - Quy Nhon Tour"/>
+    <input type="hidden" name="tourImage" value="images/taysonquynhon.jpg"/>
+    <input type="hidden" name="adultPrice" value="3800000"/>
+    <input type="hidden" name="childPrice" value="3300000"/>
+    <button type="submit" class="book-btn">Book Now</button>
+</form>
 </div>
 
 
 
 <!-- GOOGLE MAPS SECTION -->
 <section class="map-section">
-  <h2>📍 Tour Location — Tay Son, Quy Nhơn</h2>
+  <h2>📍 Tour Location — Tay Son, Quy Nhon</h2>
   <div id="map"></div>
 </section>
 
@@ -220,7 +212,7 @@
       new google.maps.Marker({
         position: baoTangQuangTrung,
         map: map,
-        title: "Bảo Tàng Quang Trung, Tây Sơn",
+        title: "Bao Tang Quang Trung, Tay Son",
       });
     }
   </script>
@@ -231,21 +223,9 @@
   </script>
 
 
-       <!-- FOOTER -->
-  <footer class="qnt-footer">
-    <div class="footer-inner">
-      <div class="brand">
-        <span class="brand-name">QuyNhonTour</span>
-        <small class="copyright">©2025 QuyNhonTour. All rights reserved.</small>
-      </div>
-      <nav class="footer-links">
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#">Support</a>
-      </nav>
-    </div>
-  </footer>
+  
 
   </main>
+  <jsp:include page="footer.jsp" />
 </body>
 </html>
