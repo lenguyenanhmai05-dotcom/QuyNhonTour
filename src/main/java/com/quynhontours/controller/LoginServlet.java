@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
 
         // Kiểm tra rỗng
         if (email == null || password == null || email.trim().isEmpty() || password.trim().isEmpty()) {
-            response.sendRedirect("login.html?error=empty");
+            response.sendRedirect("login.jsp?error=empty");
             return;
         }
 
@@ -59,6 +59,6 @@ public class LoginServlet extends HttpServlet {
         }
 
         // ❌ Sai email hoặc mật khẩu
-        response.sendRedirect("login.html?error=invalid");
+        response.sendRedirect("login.jsp?error=invalid");
     }
 }

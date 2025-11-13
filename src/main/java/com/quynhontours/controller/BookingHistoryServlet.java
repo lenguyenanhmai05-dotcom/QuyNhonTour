@@ -14,7 +14,8 @@ public class BookingHistoryServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // 🔐 Lấy email người dùng từ session
-        String userEmail = (String) request.getSession().getAttribute("userEmail");
+        HttpSession session = request.getSession();
+        String userEmail = (String) session.getAttribute("userEmail");
         if (userEmail == null || userEmail.isEmpty()) {
             response.sendRedirect("login.jsp");
             return;

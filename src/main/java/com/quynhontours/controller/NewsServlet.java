@@ -17,23 +17,24 @@ public class NewsServlet extends HttpServlet {
         if (action == null) action = "list";
 
         switch (action) {
-            case "new":
-                request.getRequestDispatcher("/admin/news-form.jsp").forward(request, response);
-                break;
-            case "edit":
-                String id = request.getParameter("id");
-                News news = dao.getNewsById(id);
-                request.setAttribute("news", news);
-                request.getRequestDispatcher("/admin/news-form.jsp").forward(request, response);
-                break;
             case "delete":
-                dao.deleteNews(request.getParameter("id"));
-                response.sendRedirect("news");
-                break;
+            dao.deleteNews(request.getParameter("id"));
+            response.sendRedirect("news"); // ✅ ok
+            break;
+            case "edit":
+            String id = request.getParameter("id");
+            News news = dao.getNewsById(id);
+            request.setAttribute("news", news);
+            request.getRequestDispatcher("/admin/news-form.jsp").forward(request, response);
+            break;
+            case "new":
+            request.getRequestDispatcher("/admin/news-form.jsp").forward(request, response);
+            break;
             default:
                 request.setAttribute("list", dao.getAllNews());
                 request.getRequestDispatcher("/admin/news-list.jsp").forward(request, response);
-                break;
+            break;
+
         }
     }
 

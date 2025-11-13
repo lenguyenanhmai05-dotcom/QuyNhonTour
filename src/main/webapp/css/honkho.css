@@ -231,143 +231,118 @@ h2 {
 }
 
 /* ------------------------------
-   BOOKING SECTION
+   BOOKING SECTION (BLUE GRADIENT VERSION)
 --------------------------------*/
 .booking-section {
-  text-align: center;
-  padding: 60px 20px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
+  width: 90%;
   max-width: 850px;
-  margin: 60px auto;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(8px);
+  margin: 100px auto 80px;
+  padding: 60px 40px;
+  background: linear-gradient(135deg, #c3ddff, #4a90e2);
+  border-radius: 24px;
+  box-shadow: 0 12px 35px rgba(0, 59, 142, 0.15);
+  text-align: center;
+  color: #000000;
+
+  /* để tách khỏi các phần khác */
+  position: relative;
+  clear: both;
 }
 
-/* --- Nút BOOK NOW --- */
-.book-btn {
-  background: linear-gradient(90deg, #ff5f6d, #ffc371);
-  color: #fff;
-  border: none;
-  padding: 14px 36px;
-  border-radius: 30px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  letter-spacing: 0.5px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.booking-section p {
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  color: #000000;
+  font-weight: 500;
 }
 
-.book-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 10px 25px rgba(255, 95, 109, 0.4);
-}
-
-/* --- Hai khối giá --- */
+/* giá tour */
 .price-box {
   display: flex;
   justify-content: center;
   align-items: stretch;
-  gap: 40px;
-  margin: 40px auto;
+  gap: 30px;
   flex-wrap: wrap;
+  margin-bottom: 50px;
 }
 
-/* --- Mỗi khối giá --- */
 .price-item {
-  flex: 1 1 240px;
-  border-radius: 20px;
+  flex: 1 1 260px;
+  background: linear-gradient(135deg, #e6f0ff, #4a90e2);
+  border-radius: 18px;
   padding: 30px 20px;
-  background: #fff;
-  border: 3px solid transparent;
-  box-shadow: 0 6px 20px rgba(255, 154, 158, 0.25);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: #ff5f6d;
-  animation: breathe 3.5s ease-in-out infinite;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  background-clip: padding-box;
+  box-shadow: 0 6px 18px rgba(0, 59, 142, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+  color: #000000;
 }
 
 .price-item:hover {
-  transform: translateY(-8px) scale(1.05);
-  box-shadow: 0 12px 35px rgba(255, 154, 158, 0.5);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0, 59, 142, 0.25);
+  background: linear-gradient(135deg, #4a90e2, #2c6ecb);
+  color: #ffffff; /* đổi toàn bộ chữ trong khối sang trắng */
 }
 
-/* --- Gradient chữ --- */
-.price-item h4,
-.price-item p,
-.price-item small {
-  background: linear-gradient(90deg, #ff5f6d, #ffc371);
-  -webkit-text-fill-color: transparent;
+/* đổi màu riêng cho tiêu đề và giá khi hover */
+.price-item:hover h4,
+.price-item:hover p {
+  color: #ffffff;
 }
 
-/* --- Tiêu đề nhỏ --- */
 .price-item h4 {
-  font-size: 22px;
-  margin-bottom: 15px;
-  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #000000;
 }
 
-/* --- Giá tiền --- */
 .price-item p {
-  font-size: 26px;
-  font-weight: 800;
-  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #025196;
 }
 
-/* --- Ghi chú nhỏ --- */
-.price-item small {
-  font-size: 15px;
-  font-weight: 500;
-  opacity: 0.9;
+/* nút đặt tour */
+.book-btn {
+  background: linear-gradient(90deg, #4a90e2, #2c6ecb);
+  color: #fff;
+  border: none;
+  padding: 16px 42px;
+  border-radius: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 22px rgba(46, 129, 235, 0.35);
+  transition: all 0.3s ease;
+  animation: breathing 2s ease-in-out infinite; /* hiệu ứng thở */
 }
 
-/* --- Hiệu ứng nhịp thở --- */
-@keyframes breathe {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+.book-btn:hover {
+  background: linear-gradient(90deg, #2c6ecb, #1d56b3);
+  transform: scale(1.05);
 }
 
-
-/* ------------------------------
-   HIỆU ỨNG THỞ CHO GIÁ TOUR
---------------------------------*/
-.booking-section h3 {
-  color: #ff4d4d;
-  font-size: 28px;
-  margin: 10px 0;
-  animation: breathing 2.5s ease-in-out infinite;
-}
-
+/* hiệu ứng thở cho nút Book Now */
 @keyframes breathing {
   0% {
     transform: scale(1);
-    text-shadow: 0 0 0 rgba(255, 77, 77, 0);
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
   }
   50% {
-    transform: scale(1.1);
-    text-shadow: 0 0 12px rgba(255, 77, 77, 0.6);
+    transform: scale(1.05);
+    text-shadow: 0 0 16px rgba(255, 255, 255, 0.7);
   }
   100% {
     transform: scale(1);
-    text-shadow: 0 0 0 rgba(255, 77, 77, 0);
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
   }
 }
 
-.site-footer {
-  background: linear-gradient(135deg, #0077b6, #00b4d8) !important;
-  color: #fff !important;
-  padding: 50px 0 20px;
-  font-family: 'Poppins', sans-serif;
-  position: relative; /* đảm bảo không bị overlay từ các section trước */
-  z-index: 10;       /* ưu tiên hiển thị */
-}
-
-.site-footer .footer-logo,
-.site-footer span {
-  color: #fff !important;
+/* đảm bảo luôn hiển thị trên footer và không bị che */
+.booking-section,
+.price-box,
+.book-btn {
+  z-index: auto;
 }

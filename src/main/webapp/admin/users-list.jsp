@@ -1,67 +1,63 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <!DOCTYPE html>
-    <html lang="vi">
+<%@ page import="java.util.List" %>
+<%@ page import="com.quynhontours.model.User" %>
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Users Management</title>
-        <link rel="stylesheet" href="../css/admin.css">
-    </head>
+<%
+    List<User> userList = (List<User>) request.getAttribute("list");
+%>
 
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
 
-        <!-- <div class="sidebar">
-            <h2>🧭 Admin Panel</h2>
-            <a href="dashboard">🏠 Dashboard</a>
-            <a href="tour-list.jsp">📍 Tours Management</a>
-            <a href="news-list.jsp">📰 News Management</a>
-            <a href="users-list.jsp">👤 Users Management</a>
-            <a href="orders-list.jsp">👤 Orders Management</a>
-            <a href="admin-booking.jsp" class="active">📦 Bookings Management</a>
-        </div> -->
+<header>
+    <h1>Users Management</h1>
+    <a href="<%= request.getContextPath() %>/logout" class="logout-btn">Logout</a>
+</header>
 
-        <div class="main">
-            <div class="header">
-                <h1>Users Management</h1>
-                <a href="<%= request.getContextPath() %>/logout">Logout</a>
-            </div>
+<div class="container">
+    <div class="top-btns">
+        <a href="dashboard" class="back-btn">← Back to Dashboard</a>
+    </div>
 
-            <div>
-                <a href="dashboard" class="back-btn">← Back to Dashboard</a>
-                <!-- <a href="news-form.jsp" class="add-btn">+ Add New Tour</a> -->
-            </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Role</th>
+                <th>Date of Birth</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(userList != null && !userList.isEmpty()) { 
+                for(User u : userList) { %>
+                <tr>
+                    <td><%= u.getEmail() %></td>
+                    <td><%= u.getFirstName() %></td>
+                    <td><%= u.getLastName() %></td>
+                    <td><%= u.getRole() %></td>
+                    <td><%= u.getDob() %></td>
+                    <td>
+                        <a href="users?action=delete&email=<%= u.getEmail() %>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                    </td>
+                </tr>
+            <% } } else { %>
+                <tr>
+                    <td colspan="6" style="text-align:center;">No users available</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
 
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Tên</th>
-                            <th>Email</th>
-                            <th>Vai trò</th>
-                            <th>Ngày tạo</th>
-                            <th>Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Nguyễn Văn A</td>
-                            <td>a.nguyen@example.com</td>
-                            <td>Admin</td>
-                            <td>10/10/2025</td>
-                            <td>
-                                <a href="user-edit.jsp?id=1"
-                                    style="background:#f1c40f;color:black;border:none;padding:6px 10px;border-radius:4px;">Sửa</a>
-                                <button
-                                    style="background:#e74c3c;color:white;border:none;padding:6px 10px;border-radius:4px;">Xóa</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </body>
-
-    </html>
+</body>
+</html>

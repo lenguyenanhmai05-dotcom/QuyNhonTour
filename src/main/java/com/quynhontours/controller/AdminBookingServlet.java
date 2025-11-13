@@ -1,6 +1,8 @@
 package com.quynhontours.controller;
 
 import com.quynhontours.dao.BookingDAO;
+import com.quynhontours.model.Booking;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -12,13 +14,27 @@ public class AdminBookingServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String bookingId = request.getParameter("bookingId");
-        String action = request.getParameter("action");
+        String orderStatus = request.getParameter("orderStatus");
 
-        if ("confirm".equalsIgnoreCase(action) && bookingId != null && !bookingId.isEmpty()) {
+        if (bookingId != null && !bookingId.isEmpty() && orderStatus != null) {
             BookingDAO dao = new BookingDAO();
-            dao.updatePaymentStatus(bookingId, "PAID");  // ✅ cập nhật trạng thái thanh toán
+
+            // Cập nhật trạng thái order
+            dao.updateOrderStatus(bookingId, orderStatus);
+
+            // Lấy booking để kiểm tra paymentStatus
+            Booking booking = dao.getById(bookingId);
+            if ("COMPLETED".equalsIgnoreCase(orderStatus)
+                && booking != null
+                && "PENDING".equalsIgnoreCase(booking.getPaymentStatus())
+                && "ONLINE".equalsIgnoreCase(booking.getPaymentMethod())) {
+
+                // Nếu hoàn tất, tự động mark là PAID
+                dao.updatePaymentStatus(bookingId, "PAID");
+            }
         }
 
-        response.sendRedirect(request.getContextPath() + "/admin/admin-booking.jsp");
+        // Quay lại trang admin-booking.jsp
+        response.sendRedirect(request.getContextPath() + "/admin-booking.jsp");
     }
 }

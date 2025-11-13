@@ -7,6 +7,9 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserDAO {
     private final MongoCollection<Document> users;
 
@@ -15,7 +18,7 @@ public class UserDAO {
         users = db.getCollection("users");
     }
 
-    // 🟢 Insert new user (if email does not exist)
+    // Insert new user if email not exists
     public boolean insertUser(User user) {
         if (getUserByEmail(user.getEmail()) != null) return false;
 
@@ -29,22 +32,39 @@ public class UserDAO {
         return true;
     }
 
-    // 🟢 Get user by email
+    // Get user by email
     public User getUserByEmail(String email) {
         Document doc = users.find(Filters.eq("email", email)).first();
         if (doc == null) return null;
 
-        User u = new User();
-        u.setFirstName(doc.getString("firstName"));
-        u.setLastName(doc.getString("lastName"));
-        u.setEmail(doc.getString("email"));
-        u.setDob(doc.getString("dob"));
-        u.setPassword(doc.getString("password"));
-        u.setRole(doc.getString("role"));
-        return u;
+        return documentToUser(doc);
     }
 
-    // 🟢 Validate login (email + password)
+    // Update user password
+    public boolean updatePassword(String email, String newPassword) {
+        Document found = users.find(Filters.eq("email", email)).first();
+        if (found == null) return false;
+
+        users.updateOne(Filters.eq("email", email),
+                new Document("$set", new Document("password", newPassword)));
+        return true;
+    }
+
+    // Delete user
+    public void deleteUser(String email) {
+        users.deleteOne(Filters.eq("email", email));
+    }
+
+    // Get all users
+    public List<User> getAllUsers() {
+        List<User> list = new ArrayList<>();
+        for (Document doc : users.find()) {
+            list.add(documentToUser(doc));
+        }
+        return list;
+    }
+
+    // Validate login
     public boolean validateLogin(String email, String password) {
         Document doc = users.find(Filters.and(
                 Filters.eq("email", email),
@@ -53,13 +73,15 @@ public class UserDAO {
         return doc != null;
     }
 
-    // 🟢 Update password (forgot password)
-    public boolean updatePassword(String email, String newPassword) {
-        Document found = users.find(Filters.eq("email", email)).first();
-        if (found == null) return false;
-
-        users.updateOne(Filters.eq("email", email),
-                new Document("$set", new Document("password", newPassword)));
-        return true;
+    // Helper: convert Document -> User
+    private User documentToUser(Document doc) {
+        User u = new User();
+        u.setFirstName(doc.getString("firstName"));
+        u.setLastName(doc.getString("lastName"));
+        u.setEmail(doc.getString("email"));
+        u.setDob(doc.getString("dob"));
+        u.setPassword(doc.getString("password"));
+        u.setRole(doc.getString("role"));
+        return u;
     }
 }

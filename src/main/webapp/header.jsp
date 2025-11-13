@@ -35,7 +35,7 @@
             <div class="hamburger" id="hamburger">&#9776;</div>
             <div class="dropdown-menu" id="userMenu">
                 <a href="cart.jsp"><i class="fa-solid fa-cart-shopping"></i> View Cart</a>
-                <a href="booking-history.jsp"><i class="fa-solid fa-clock-rotate-left"></i> Booking History</a>
+                <a href="BookingHistoryServlet"><i class="fa-solid fa-clock-rotate-left"></i> Booking History</a>
                 <a href="logout.jsp"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
             </div>
           </div>

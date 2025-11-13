@@ -17,7 +17,6 @@ body {
 
 
 
-/* 🌊 Hero Section - Ocean Vibe */
 .hero {
   display: flex;
   justify-content: center;
@@ -26,7 +25,7 @@ body {
   background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
   color: white;
   position: relative;
-  height: 80vh;
+  height: 80vh; /* tăng chiều cao hero để chữ không bị che */
   overflow: hidden;
 }
 
@@ -39,7 +38,6 @@ body {
   backdrop-filter: none;
 } 
 
-/* Nội dung hero */
 .hero-content {
   position: relative;
   z-index: 1;
@@ -58,7 +56,6 @@ body {
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   animation: floatText 3s ease-in-out infinite alternate;
 }
-
 
 
 /* Mô tả */

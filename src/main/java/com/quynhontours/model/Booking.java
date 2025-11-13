@@ -1,6 +1,7 @@
 package com.quynhontours.model;
 
 import org.bson.Document;
+import java.util.Date;
 
 public class Booking {
     private String id;
@@ -11,28 +12,39 @@ public class Booking {
     private int numAdults;
     private int numChildren;
     private int guests;
-    private String paymentMethod;
-    private String paymentStatus;
+    private final String paymentMethod = "ONLINE"; // chỉ online
+    private String paymentStatus; // PENDING, PAID
     private double totalPrice;
+    private String orderStatus;   // PROCESSING, COMPLETED, CANCELLED
+    private Date startDate;       // thống nhất với JSP: startDate
 
+    // ===== Constructors =====
     public Booking() {}
 
-    public Booking(String tourName, String name, String email, String phone,
-                   int numAdults, int numChildren, String paymentMethod,
-                   String paymentStatus, double totalPrice) {
+    public Booking(String tourName, String customerName, String customerEmail, String customerPhone,
+                   int numAdults, int numChildren, String paymentStatus, double totalPrice, Date startDate) {
         this.tourName = tourName;
-        this.customerName = name;
-        this.customerEmail = email;
-        this.customerPhone = phone;
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.customerPhone = customerPhone;
         this.numAdults = numAdults;
         this.numChildren = numChildren;
         this.guests = numAdults + numChildren;
-        this.paymentMethod = paymentMethod;
         this.paymentStatus = paymentStatus;
         this.totalPrice = totalPrice;
+        this.startDate = startDate;
+
+        // Tự động set orderStatus theo paymentStatus
+        if ("PAID".equalsIgnoreCase(paymentStatus)) {
+            this.orderStatus = "COMPLETED";
+        } else if ("PENDING".equalsIgnoreCase(paymentStatus)) {
+            this.orderStatus = "PROCESSING";
+        } else {
+            this.orderStatus = "CANCELLED";
+        }
     }
 
-    // 🧩 Getter – Setter
+    // ===== Getters & Setters =====
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
@@ -58,15 +70,30 @@ public class Booking {
     public void setGuests(int guests) { this.guests = guests; }
 
     public String getPaymentMethod() { return paymentMethod; }
-    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
 
     public String getPaymentStatus() { return paymentStatus; }
-    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+        // Cập nhật orderStatus theo paymentStatus
+        if ("PAID".equalsIgnoreCase(paymentStatus)) {
+            this.orderStatus = "COMPLETED";
+        } else if ("PENDING".equalsIgnoreCase(paymentStatus)) {
+            this.orderStatus = "PROCESSING";
+        } else {
+            this.orderStatus = "CANCELLED";
+        }
+    }
 
     public double getTotalPrice() { return totalPrice; }
     public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
 
-    // 🧠 Convert sang Document để lưu MongoDB
+    public String getOrderStatus() { return orderStatus; }
+    public void setOrderStatus(String orderStatus) { this.orderStatus = orderStatus; }
+
+    public Date getStartDate() { return startDate; }
+    public void setStartDate(Date startDate) { this.startDate = startDate; }
+
+    // ===== Convert to MongoDB Document =====
     public Document toDocument() {
         return new Document("tourName", tourName)
                 .append("customerName", customerName)
@@ -77,9 +104,12 @@ public class Booking {
                 .append("guests", guests)
                 .append("paymentMethod", paymentMethod)
                 .append("paymentStatus", paymentStatus)
-                .append("totalPrice", totalPrice);
+                .append("totalPrice", totalPrice)
+                .append("orderStatus", orderStatus)
+                .append("startDate", startDate); // MongoDB dùng startDate
     }
 
+    // ===== Convert from MongoDB Document =====
     public static Booking fromDocument(Document doc) {
         Booking b = new Booking();
         b.setId(doc.getObjectId("_id").toHexString());
@@ -87,12 +117,38 @@ public class Booking {
         b.setCustomerName(doc.getString("customerName"));
         b.setCustomerEmail(doc.getString("customerEmail"));
         b.setCustomerPhone(doc.getString("customerPhone"));
-        b.setNumAdults(doc.getInteger("numAdults", 0));
-        b.setNumChildren(doc.getInteger("numChildren", 0));
-        b.setGuests(doc.getInteger("guests", 0));
-        b.setPaymentMethod(doc.getString("paymentMethod"));
+
+        Number adultsNum = (Number) doc.get("numAdults");
+        b.setNumAdults(adultsNum != null ? adultsNum.intValue() : 0);
+
+        Number childrenNum = (Number) doc.get("numChildren");
+        b.setNumChildren(childrenNum != null ? childrenNum.intValue() : 0);
+
+        Number guestsNum = (Number) doc.get("guests");
+        b.setGuests(guestsNum != null ? guestsNum.intValue() : (b.getNumAdults() + b.getNumChildren()));
+
         b.setPaymentStatus(doc.getString("paymentStatus"));
-        b.setTotalPrice(doc.getDouble("totalPrice"));
+
+        Number totalPriceNum = (Number) doc.get("totalPrice");
+        b.setTotalPrice(totalPriceNum != null ? totalPriceNum.doubleValue() : 0.0);
+
+        String statusFromDb = doc.getString("orderStatus");
+        String paymentStatus = b.getPaymentStatus();
+        if (statusFromDb != null && !statusFromDb.isEmpty()) {
+            b.setOrderStatus(statusFromDb);
+        } else {
+            if ("PAID".equalsIgnoreCase(paymentStatus)) {
+                b.setOrderStatus("COMPLETED");
+            } else if ("PENDING".equalsIgnoreCase(paymentStatus)) {
+                b.setOrderStatus("PROCESSING");
+            } else {
+                b.setOrderStatus("CANCELLED");
+            }
+        }
+
+        // ===== Lấy startDate từ MongoDB =====
+        b.setStartDate(doc.getDate("startDate"));
+
         return b;
     }
 }
