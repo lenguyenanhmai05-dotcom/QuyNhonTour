@@ -1,59 +1,57 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <% // Kiểm tra quyền admin (nếu chưa login -> chuyển về login)
-        String role = (String) session.getAttribute("role");
-        if (role == null || !"admin".equalsIgnoreCase(role)) {
+<%
+    // Kiểm tra quyền admin (nếu chưa login -> chuyển về login)
+    String role = (String) session.getAttribute("role");
+    if (role == null || !"admin".equalsIgnoreCase(role)) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
         return;
-        }
-        String firstName = (String) session.getAttribute("firstName");
+    }
+    String firstName = (String) session.getAttribute("firstName");
 
-        // Safe read helper: lấy attribute và chuyển thành long an toàn
-        Object oTour = request.getAttribute("tourCount");
-        Object oNews = request.getAttribute("newsCount");
-        Object oUser = request.getAttribute("userCount");
-        Object oOrder = request.getAttribute("orderCount");
+    // Safe read helper: lấy attribute và chuyển thành long an toàn
+    Object oTour = request.getAttribute("tourCount");
+    Object oNews = request.getAttribute("newsCount");
+    Object oUser = request.getAttribute("userCount");
+    Object oOrder = request.getAttribute("orderCount");
 
-        Object oCompleted = request.getAttribute("completed");
-        Object oProcessing = request.getAttribute("processing");
-        Object oCanceled = request.getAttribute("canceled");
+    Object oCompleted = request.getAttribute("completed");
+    Object oProcessing = request.getAttribute("processing");
+    Object oCanceled = request.getAttribute("canceled");
 
-        java.util.function.Function<Object, Long> toLong = (obj) -> {
-            if (obj == null) return 0L;
-            if (obj instanceof Number) return ((Number) obj).longValue();
-            try {
+    java.util.function.Function<Object, Long> toLong = (obj) -> {
+        if (obj == null) return 0L;
+        if (obj instanceof Number) return ((Number) obj).longValue();
+        try {
             return Long.parseLong(obj.toString());
-            } catch (Exception ex) {
+        } catch (Exception ex) {
             return 0L;
-            }
-            };
+        }
+    };
 
-            long tourCount = toLong.apply(oTour);
-            long newsCount = toLong.apply(oNews);
-            long userCount = toLong.apply(oUser);
-            long orderCount = toLong.apply(oOrder);
+    long tourCount = toLong.apply(oTour);
+    long newsCount = toLong.apply(oNews);
+    long userCount = toLong.apply(oUser);
+    long orderCount = toLong.apply(oOrder);
 
-            long completed = toLong.apply(oCompleted);
-            long processing = toLong.apply(oProcessing);
-            long canceled = toLong.apply(oCanceled);
-            %>
+    long completed = toLong.apply(oCompleted);
+    long processing = toLong.apply(oProcessing);
+    long canceled = toLong.apply(oCanceled);
+%>
 
-            <!DOCTYPE html>
-            <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - QuyNhonTours</title>
 
-            <head>
-                <meta charset="UTF-8">
-                <title>Admin Dashboard - QuyNhonTours</title>
+    <!-- Fonts / Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-                <!-- Fonts / Icons -->
-                <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-                    rel="stylesheet">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-                    integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-                <!-- Chart.js -->
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-                <style>
+    <style>
                     /* --- basic styling, kept compact --- */
                     * {
                         box-sizing: border-box;
@@ -209,107 +207,91 @@
                         }
                     }
                 </style>
-            </head>
+</head>
+<body>
 
-            <body>
+<header>
+    <h1>Welcome, <%= (firstName != null ? firstName : "Admin") %></h1>
+    <a href="<%= request.getContextPath() %>/logout">Logout</a>
+</header>
 
-                <header>
-                    <h1>Welcome, <%= (firstName !=null ? firstName : "Admin" ) %>
-                    </h1>
-                    <a href="<%= request.getContextPath() %>/logout">Logout</a>
-                </header>
+<div class="container">
+    <h2>Admin Dashboard</h2>
 
-                <div class="container">
-                    <h2>Admin Dashboard</h2>
+    <div class="cards">
+        <div class="card">
+            <div class="icon"><i class="fas fa-map-marked-alt"></i></div>
+            <h3>Tours</h3>
+            <div class="count"><%= tourCount %></div>
+        </div>
 
-                    <div class="cards">
-                        <div class="card">
-                            <div class="icon"><i class="fas fa-map-marked-alt"></i></div>
-                            <h3>Tours</h3>
-                            <div class="count">
-                                <%= tourCount %>
-                            </div>
-                        </div>
+        <div class="card">
+            <div class="icon"><i class="fas fa-newspaper"></i></div>
+            <h3>News</h3>
+            <div class="count"><%= newsCount %></div>
+        </div>
 
-                        <div class="card">
-                            <div class="icon"><i class="fas fa-newspaper"></i></div>
-                            <h3>News</h3>
-                            <div class="count">
-                                <%= newsCount %>
-                            </div>
-                        </div>
+        <div class="card">
+            <div class="icon"><i class="fas fa-users"></i></div>
+            <h3>Users</h3>
+            <div class="count"><%= userCount %></div>
+        </div>
 
-                        <div class="card">
-                            <div class="icon"><i class="fas fa-users"></i></div>
-                            <h3>Users</h3>
-                            <div class="count">
-                                <%= userCount %>
-                            </div>
-                        </div>
+        <div class="card">
+            <div class="icon"><i class="fas fa-shopping-cart"></i></div>
+            <h3>Orders</h3>
+            <div class="count"><%= orderCount %></div>
+        </div>
 
-                        <div class="card">
-                            <div class="icon"><i class="fas fa-shopping-cart"></i></div>
-                            <h3>Orders</h3>
-                            <div class="count">
-                                <%= orderCount %>
-                            </div>
-                        </div>
+         <!-- ✅ Thêm mới -->
+    <div class="card">
+        <div class="icon"><i class="fas fa-receipt"></i></div>
+        <h3>Bookings</h3>
+        <div class="count"><%= request.getAttribute("bookingCount") %></div>
+    </div>
+    
+</div>
 
-                        <!-- ✅ Thêm mới -->
-                        <div class="card">
-                            <div class="icon"><i class="fas fa-receipt"></i></div>
-                            <h3>Bookings</h3>
-                            <div class="count">
-                                <%= request.getAttribute("bookingCount") %>
-                            </div>
-                        </div>
-                    </div>
+    <div class="manage-links">
+    <a href="<%= request.getContextPath() %>/admin/tour-list.jsp">Manage Tours</a>
+    <a href="<%= request.getContextPath() %>/admin/news">Manage News</a>
+    <a href="<%= request.getContextPath() %>/admin/users">Manage Users</a>
+    <a href="<%= request.getContextPath() %>/admin/orders-list.jsp">Manage Orders</a>
+    <a href="<%= request.getContextPath() %>/admin/admin-booking.jsp">Manage Bookings</a> <!-- ✅ thêm dòng này -->
+</div>
+<div class="chart-box">
+        <h3 style="margin-top:0;">Order Status Overview</h3>
+        <canvas id="orderChart" style="max-width:600px;margin:12px auto 0; display:block;"></canvas>
+    </div>
+</div>
 
-                    <div class="manage-links">
-                        <a href="<%= request.getContextPath() %>/admin/tour-list.jsp">Manage Tours</a>
-                        <a href="<%= request.getContextPath() %>/admin/news-list.jsp">Manage News</a>
-                        <a href="<%= request.getContextPath() %>/admin/users-list.jsp">Manage Users</a>
-                        <a href="<%= request.getContextPath() %>/admin/orders-list.jsp">Manage Orders</a>
-                        <a href="<%= request.getContextPath() %>/admin/admin-booking.jsp">Manage Bookings</a>
-                        <!-- ✅ thêm dòng này -->
-                    </div>
-                    
-                    <div class="chart-box">
-                        <h3 style="margin-top:0;">Order Status Overview</h3>
-                        <canvas id="orderChart" style="max-width:600px;margin:12px auto 0; display:block;"></canvas>
-                    </div>
+<script>
+    // Chart data from server (already safe-long converted in JSP)
+    const processing = parseInt("<%= String.valueOf(processing) %>") || 0;
+    const completed  = parseInt("<%= String.valueOf(completed) %>")  || 0;
+    const canceled   = parseInt("<%= String.valueOf(canceled) %>")   || 0;
 
 
-                </div>
+    const ctx = document.getElementById('orderChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Processing', 'Completed', 'Canceled'],
+            datasets: [{
+                data: [processing, completed, canceled],
+                backgroundColor: ['#ffca28','#66bb6a','#ef5350'],
+                borderColor: '#fff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        }
+    });
+</script>
 
-                <script>
-                    // Chart data from server (already safe-long converted in JSP)
-                    const processing = parseInt("<%= String.valueOf(processing) %>") || 0;
-                    const completed = parseInt("<%= String.valueOf(completed) %>") || 0;
-                    const canceled = parseInt("<%= String.valueOf(canceled) %>") || 0;
-
-
-                    const ctx = document.getElementById('orderChart').getContext('2d');
-                    const myChart = new Chart(ctx, {
-                        type: 'doughnut',
-                        data: {
-                            labels: ['Processing', 'Completed', 'Canceled'],
-                            datasets: [{
-                                data: [processing, completed, canceled],
-                                backgroundColor: ['#ffca28', '#66bb6a', '#ef5350'],
-                                borderColor: '#fff',
-                                borderWidth: 2
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: { position: 'bottom' }
-                            }
-                        }
-                    });
-                </script>
-
-            </body>
-
-            </html>
+</body>
+</html>

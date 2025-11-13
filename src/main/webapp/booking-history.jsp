@@ -1,60 +1,65 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List, java.text.SimpleDateFormat" %>
 <%@ page import="com.quynhontours.model.Booking" %>
 
 <%
     List<Booking> bookings = (List<Booking>) request.getAttribute("bookings");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Your Booking History</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f8fbff; }
-        h2 { text-align:center; margin-top:30px; color:#0078AA; }
-        table { border-collapse: collapse; margin: 30px auto; width: 80%; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
-        th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: center; }
-        th { background: #0078AA; color: white; }
-        tr:hover { background-color: #f1f9ff; }
-        .paid { color: green; font-weight: 600; }
-        .pending { color: orange; font-weight: 600; }
-    </style>
+    <title>Booking History</title>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css">
 </head>
 <body>
-    <h2>Booking History</h2>
-    <table>
-        <tr>
-            <th>Tour</th>
-            <th>Name</th>
-            <th>Guests</th>
-            <th>Payment</th>
-            <th>Status</th>
-            <th>Total (VND)</th>
-        </tr>
-        <%
-            if (bookings != null && !bookings.isEmpty()) {
-                for (Booking b : bookings) {
-        %>
-        <tr>
-            <td><%= b.getTourName() %></td>
-            <td><%= b.getCustomerName() %></td>
-            <td><%= b.getGuests() %></td>
-            <td><%= b.getPaymentMethod() %></td>
-            <td class="<%= b.getPaymentStatus().equals("PAID") ? "paid" : "pending" %>">
-                <%= b.getPaymentStatus() %>
-            </td>
-            <td><%= String.format("%,.0f", b.getTotalPrice()) %></td>
-        </tr>
-        <%
+    <header>
+        <h1>Booking History</h1>
+        <a href="<%=request.getContextPath()%>/logout" class="logout-btn">Logout</a>
+    </header>
+
+    <div class="container">
+        <div class="top-btns">
+            <a href="<%=request.getContextPath()%>/index.jsp" class="back-btn">Back to Home</a>
+        </div>
+
+        <table>
+            <tr>
+                <th>Tour</th>
+                <th>Name</th>
+                <th>Guests</th>
+                <th>Start Date</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Total (VND)</th>
+            </tr>
+            <%
+                if (bookings != null && !bookings.isEmpty()) {
+                    for (Booking b : bookings) {
+                        String statusClass = b.getPaymentStatus().equalsIgnoreCase("PAID") ? "status-completed" : "status-processing";
+            %>
+            <tr>
+                <td><%= b.getTourName() %></td>
+                <td><%= b.getCustomerName() %></td>
+                <td><%= b.getGuests() %></td>
+                <td><%= b.getStartDate() != null ? sdf.format(b.getStartDate()) : "-" %></td>
+                <td><%= b.getPaymentMethod() %> / <%= b.getPaymentStatus() %></td>
+                <td class="<%= statusClass %>"><%= b.getOrderStatus() %></td>
+                <td><%= String.format("%,.0f", b.getTotalPrice()) %></td>
+            </tr>
+            <%
+                    }
+                } else {
+            %>
+            <tr>
+                <td colspan="7" style="text-align:center;">No bookings found.</td>
+            </tr>
+            <%
                 }
-            } else {
-        %>
-        <tr><td colspan="6">No bookings found.</td></tr>
-        <%
-            }
-        %>
-    </table>
+            %>
+        </table>
+    </div>
 </body>
 </html>

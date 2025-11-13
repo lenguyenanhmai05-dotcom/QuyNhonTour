@@ -1,193 +1,221 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.quynhontours.model.Tour" %>
+
+<%
+    Tour tour = (Tour) request.getAttribute("tour");
+    boolean editing = (tour != null);
+%>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Add New Tour</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #e9f5ff, #ffffff);
-            margin: 0;
-            padding: 40px 0;
-        }
+<meta charset="UTF-8">
+<title><%= editing ? "Edit Tour" : "Add New Tour" %></title>
+<link rel="stylesheet" href="../css/admin.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f3f6fb;
+        margin: 0;
+        padding: 0;
+        color: #2c3e50;
+    }
 
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 25px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: linear-gradient(135deg, #3b82f6, #1e40af, #60a5fa);
+        color: #fff;
+        text-align: center;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
 
-        form {
-            max-width: 700px;
-            margin: auto;
-            background: #fff;
-            padding: 30px 40px;
-            border-radius: 16px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+    header h1 {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 600;
+    }
 
-        form:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-        }
+    .logout-btn {
+        color: #fff;
+        text-decoration: none;
+        margin-top: 10px;
+        font-weight: 500;
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 6px 14px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
 
-        label {
-            display: block;
-            font-weight: 500;
-            margin-top: 15px;
-            color: #444;
-        }
+    .logout-btn:hover {
+        background: rgba(255,255,255,0.2);
+    }
 
-        input,
-        textarea,
-        select {
-            width: 100%;
-            padding: 10px 12px;
-            margin-top: 6px;
-            border: 1px solid #d0d0d0;
-            border-radius: 8px;
-            font-size: 15px;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
+    .form-container {
+        background: #fff;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 40px 50px;
+        border-radius: 14px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
 
-        input:focus,
-        textarea:focus,
-        select:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
-            outline: none;
-        }
+    .form-container h2 {
+        text-align: center;
+        color: #2563eb;
+        margin-bottom: 25px;
+        font-size: 28px;
+    }
 
-        textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
+    .form-group {
+        margin-bottom: 18px;
+    }
 
-        .form-row {
-            display: flex;
-            gap: 20px;
-        }
+    label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+    }
 
-        .form-row .col {
-            flex: 1;
-        }
+    input[type="text"],
+    input[type="number"],
+    textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border 0.2s ease;
+    }
 
-        .actions {
-            margin-top: 25px;
-            text-align: center;
-        }
+    input:focus, textarea:focus {
+        border-color: #2563eb;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
 
-        button {
-            background: #364ff0;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.25s ease, transform 0.1s ease;
-        }
+    textarea {
+        resize: vertical;
+        min-height: 150px;
+    }
 
-        button:hover {
-            background: #218838;
-            transform: translateY(-1px);
-        }
+    .btn-group {
+        text-align: center;
+        margin-top: 30px;
+    }
 
-        a {
-            display: inline-block;
-            text-decoration: none;
-            color: white;
-            background: #6c757d;
-            padding: 10px 20px;
-            border-radius: 8px;
-            margin-left: 8px;
-            font-size: 15px;
-            transition: background 0.25s ease, transform 0.1s ease;
-        }
+    .save-btn {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: #fff;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
 
-        a:hover {
-            background: #5a6268;
-            transform: translateY(-1px);
-        }
-    </style>
+    .save-btn:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    }
+
+    .back-btn {
+        display: inline-block;
+        background: #e5e7eb;
+        color: #333;
+        padding: 12px 26px;
+        text-decoration: none;
+        border-radius: 8px;
+        margin-left: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+        background: #d1d5db;
+        transform: translateY(-2px);
+    }
+</style>
 </head>
-
 <body>
 
-    <h2>Add New Tour</h2>
+<header>
+    <h1><%= editing ? "Edit Tour" : "Add New Tour" %></h1>
+    <a href="<%= request.getContextPath().trim() %>/logout" class="logout-btn">Logout</a>
+</header>
 
-    <form action="<%=request.getContextPath()%>/admin/addTour" method="post" enctype="multipart/form-data">
+<div class="form-container">
+    <form action="<%= request.getContextPath().trim() %><%= editing ? "/admin/updateTour" : "/admin/addTour" %>" method="post">
+        <% if (editing) { %>
+            <input type="hidden" name="id" value="<%= tour.getId() %>">
+        <% } %>
 
-        <label>Name:</label>
-        <input type="text" name="name" required>
-
-        <label>Description:</label>
-        <textarea name="description" required></textarea>
-
-        <div class="form-row">
-            <div class="col">
-                <label>Location:</label>
-                <input type="text" name="location" required>
-            </div>
-            <div class="col">
-                <label>Departure:</label>
-                <input type="text" name="departure" value="Quy Nhon" readonly>
-            </div>
+        <div class="form-group">
+            <label>Tour Name</label>
+            <input type="text" name="name" value="<%= editing ? tour.getName() : "" %>" required>
         </div>
 
-        <div class="form-row">
-            <div class="col">
-                <label>Destination:</label>
-                <input type="text" name="destination" placeholder="Hon Kho" required>
-            </div>
-            <div class="col">
-                <label>Duration:</label>
-                <select name="duration">
-                    <option>1 day</option>
-                    <option>2 days 1 night</option>
-                    <option>3 days 2 nights</option>
-                    <option>4 days 3 nights</option>
-                </select>
-            </div>
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" name="location" value="<%= editing ? tour.getLocation() : "" %>" required>
         </div>
 
-        <div class="form-row">
-            <div class="col">
-                <label>Start Date:</label>
-                <input type="date" name="startDate" required>
-            </div>
-            <div class="col">
-                <label>End Date:</label>
-                <input type="date" name="endDate" required>
-            </div>
+        <div class="form-group">
+            <label>Departure</label>
+            <input type="text" name="departure" value="<%= editing ? tour.getDeparture() : "" %>">
         </div>
 
-        <div class="form-row">
-            <div class="col">
-                <label>Adult Price (VND):</label>
-                <input type="number" step="0.01" name="adultPrice" required>
-            </div>
-            <div class="col">
-                <label>Child Price (VND):</label>
-                <input type="number" step="0.01" name="childPrice" required>
-            </div>
+        <div class="form-group">
+            <label>Destination</label>
+            <input type="text" name="destination" value="<%= editing ? tour.getDestination() : "" %>">
         </div>
 
-        <label>Upload Image:</label>
-        <input type="file" name="image" accept="image/*" required>
+        <div class="form-group">
+            <label>Duration</label>
+            <input type="text" name="duration" value="<%= editing ? tour.getDuration() : "" %>">
+        </div>
 
-        <div class="actions">
-            <button type="submit">Save Tour</button>
-            <a href="<%=request.getContextPath()%>/admin/tours">Back</a>
+        <div class="form-group">
+            <label>Start Date</label>
+            <input type="text" name="startDate" value="<%= editing ? tour.getStartDate() : "" %>">
+        </div>
+
+        <div class="form-group">
+            <label>End Date</label>
+            <input type="text" name="endDate" value="<%= editing ? tour.getEndDate() : "" %>">
+        </div>
+
+        <div class="form-group">
+            <label>Adult Price</label>
+            <input type="number" step="0.01" name="adultPrice" value="<%= editing ? tour.getAdultPrice() : "" %>">
+        </div>
+
+        <div class="form-group">
+            <label>Child Price</label>
+            <input type="number" step="0.01" name="childPrice" value="<%= editing ? tour.getChildPrice() : "" %>">
+        </div>
+
+        <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" name="image" value="<%= editing ? tour.getImage() : "" %>">
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="description" required><%= editing ? tour.getDescription() : "" %></textarea>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="save-btn">💾 Save</button>
+            <a href="<%= request.getContextPath().trim() %>/admin/tour-list.jsp" class="back-btn">← Back</a>
         </div>
     </form>
+</div>
 
 </body>
-
 </html>

@@ -127,11 +127,11 @@
     <div class="price-box">
     <div class="price-item adult">
       <h4>👨‍👩‍👧 Adult Price</h4>
-      <p><strong>1.300.000 VNĐ / person</strong></p>
+      <p><strong>1.300.000 VND / person</strong></p>
     </div>
     <div class="price-item child">
       <h4>🧒 Child Price</h4>
-      <p><strong>800.000 VNĐ / child (free for children under 2 years old)</strong></p>
+      <p><strong>800.000 VND / child (free for children under 2 years old)</strong></p>
     </div>
   </div>
 
