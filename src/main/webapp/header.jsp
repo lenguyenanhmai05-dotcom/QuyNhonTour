@@ -24,7 +24,9 @@
 
     <% if (firstName != null) { %>
         <div class="user-info">
-          <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="user-icon" alt="user">
+          <a href="user-profile.jsp">
+            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="user-icon" alt="user">
+          </a>
           <span class="username"><%= firstName %></span>
 
           <% if ("admin".equalsIgnoreCase(role)) { %>
