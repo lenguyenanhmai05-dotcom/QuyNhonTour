@@ -44,8 +44,9 @@ public class LoginServlet extends HttpServlet {
             if (isPasswordValid) {
                 // ✅ Đăng nhập thành công → tạo session
                 HttpSession session = request.getSession();
-                session.setAttribute("userEmail", user.getEmail());
+                session.setAttribute("email", user.getEmail());
                 session.setAttribute("firstName", user.getFirstName());
+                session.setAttribute("lastName", user.getLastName());
                 session.setAttribute("role", user.getRole());
 
                 // Điều hướng theo role

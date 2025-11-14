@@ -25,6 +25,7 @@ public class UserDAO {
         Document doc = new Document("firstName", user.getFirstName())
                 .append("lastName", user.getLastName())
                 .append("email", user.getEmail())
+                .append("phone", user.getPhone())
                 .append("dob", user.getDob())
                 .append("password", user.getPassword())
                 .append("role", user.getRole());
@@ -47,6 +48,22 @@ public class UserDAO {
 
         users.updateOne(Filters.eq("email", email),
                 new Document("$set", new Document("password", newPassword)));
+        return true;
+    }
+
+    // Update user profile
+    public boolean updateUserProfile(String email, String firstName, String lastName, String phone) {
+        Document found = users.find(Filters.eq("email", email)).first();
+        if (found == null) return false;
+
+        Document updateDoc = new Document();
+        if (firstName != null) updateDoc.append("firstName", firstName);
+        if (lastName != null) updateDoc.append("lastName", lastName);
+        if (phone != null) updateDoc.append("phone", phone);
+
+        if (!updateDoc.isEmpty()) {
+            users.updateOne(Filters.eq("email", email), new Document("$set", updateDoc));
+        }
         return true;
     }
 
@@ -79,6 +96,7 @@ public class UserDAO {
         u.setFirstName(doc.getString("firstName"));
         u.setLastName(doc.getString("lastName"));
         u.setEmail(doc.getString("email"));
+        u.setPhone(doc.getString("phone"));
         u.setDob(doc.getString("dob"));
         u.setPassword(doc.getString("password"));
         u.setRole(doc.getString("role"));

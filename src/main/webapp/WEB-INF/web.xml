@@ -284,6 +284,15 @@
         <servlet-name>RemoveFromCartServlet</servlet-name>
         <url-pattern>/RemoveFromCartServlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>UpdateUserProfileServlet</servlet-name>
+        <servlet-class>com.quynhontours.controller.UpdateUserProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateUserProfileServlet</servlet-name>
+        <url-pattern>/UpdateUserProfileServlet</url-pattern>
+    </servlet-mapping>
 
 <context-param>
     <param-name>emailUser</param-name>

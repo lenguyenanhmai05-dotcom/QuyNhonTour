@@ -23,25 +23,20 @@ public class DashboardServlet extends HttpServlet {
         long newsCount = db.getCollection("news").countDocuments();
         long userCount = db.getCollection("users").countDocuments();
 
-        // --- Bookings collection (cho user / thống kê booking riêng) ---
+        // --- Bookings collection (thống nhất cho cả user và admin) ---
         MongoCollection<Document> bookingsColl = db.getCollection("bookings");
         long bookingCount = bookingsColl.countDocuments();
 
-        // --- Orders collection (cho admin / thống kê order) ---
-        MongoCollection<Document> ordersColl = db.getCollection("orders");
-        long orderCount = ordersColl.countDocuments();
-
-        long completed = ordersColl.countDocuments(Filters.eq("orderStatus", "COMPLETED"));
-        long processing = ordersColl.countDocuments(Filters.eq("orderStatus", "PROCESSING"));
-        long canceled = ordersColl.countDocuments(Filters.eq("orderStatus", "CANCELED"));
+        long completed = bookingsColl.countDocuments(Filters.eq("orderStatus", "COMPLETED"));
+        long processing = bookingsColl.countDocuments(Filters.eq("orderStatus", "PROCESSING"));
+        long canceled = bookingsColl.countDocuments(Filters.eq("orderStatus", "CANCELED"));
 
         // --- Set attributes cho JSP ---
         req.setAttribute("tourCount", tourCount);
         req.setAttribute("newsCount", newsCount);
         req.setAttribute("userCount", userCount);
 
-        req.setAttribute("bookingCount", bookingCount); // hiển thị riêng
-        req.setAttribute("orderCount", orderCount);     // hiển thị số orders cho admin
+        req.setAttribute("bookingCount", bookingCount); // tổng số bookings
 
         req.setAttribute("completed", completed);
         req.setAttribute("processing", processing);

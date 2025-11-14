@@ -12,7 +12,6 @@
     Object oTour = request.getAttribute("tourCount");
     Object oNews = request.getAttribute("newsCount");
     Object oUser = request.getAttribute("userCount");
-    Object oOrder = request.getAttribute("orderCount");
 
     Object oCompleted = request.getAttribute("completed");
     Object oProcessing = request.getAttribute("processing");
@@ -31,7 +30,6 @@
     long tourCount = toLong.apply(oTour);
     long newsCount = toLong.apply(oNews);
     long userCount = toLong.apply(oUser);
-    long orderCount = toLong.apply(oOrder);
 
     long completed = toLong.apply(oCompleted);
     long processing = toLong.apply(oProcessing);
@@ -237,13 +235,6 @@
             <div class="count"><%= userCount %></div>
         </div>
 
-        <div class="card">
-            <div class="icon"><i class="fas fa-shopping-cart"></i></div>
-            <h3>Orders</h3>
-            <div class="count"><%= orderCount %></div>
-        </div>
-
-         <!-- ✅ Thêm mới -->
     <div class="card">
         <div class="icon"><i class="fas fa-receipt"></i></div>
         <h3>Bookings</h3>
@@ -256,11 +247,10 @@
     <a href="<%= request.getContextPath() %>/admin/tour-list.jsp">Manage Tours</a>
     <a href="<%= request.getContextPath() %>/admin/news">Manage News</a>
     <a href="<%= request.getContextPath() %>/admin/users">Manage Users</a>
-    <a href="<%= request.getContextPath() %>/admin/orders-list.jsp">Manage Orders</a>
-    <a href="<%= request.getContextPath() %>/admin/admin-booking.jsp">Manage Bookings</a> <!-- ✅ thêm dòng này -->
+    <a href="<%= request.getContextPath() %>/admin/admin-booking.jsp">Manage Bookings</a>
 </div>
 <div class="chart-box">
-        <h3 style="margin-top:0;">Order Status Overview</h3>
+        <h3 style="margin-top:0;">Booking Status Overview</h3>
         <canvas id="orderChart" style="max-width:600px;margin:12px auto 0; display:block;"></canvas>
     </div>
 </div>

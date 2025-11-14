@@ -27,9 +27,17 @@
 <style>
     body {
         font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #fdf6f0, #f9f9f9);
+        background: linear-gradient(180deg, #fff8f3, #fffdfb);
         margin: 0;
-        padding: 40px 0;
+        padding: 40px 0 80px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #1e293b;
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 40px;
     }
 
     .booking-wrapper {
@@ -54,32 +62,54 @@
         background: #fafafa;
         border-radius: 12px;
         padding: 25px;
-        text-align: center;
         box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .info-section img {
         width: 100%;
-        max-height: 250px;
+        max-height: 260px;
         object-fit: cover;
         border-radius: 12px;
         margin-bottom: 20px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    h1 {
-        text-align: center;
-        color: #2c3e50;
-        font-size: 28px;
-        font-weight: 600;
-        margin-bottom: 35px;
+    .price-info {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .price-info p {
+        margin: 6px 0;
+        font-size: 16px;
+        color: #374151;
+    }
+
+    .price-info strong {
+        color: #1e293b;
+    }
+
+    .total-highlight {
+        text-align: right;
+        font-size: 22px;
+        font-weight: 700;
+        color: #e11d48;
+        border-top: 2px solid #eee;
+        padding-top: 18px;
+        width: 100%;
+        letter-spacing: 0.5px;
     }
 
     label {
         font-weight: 600;
         display: block;
         margin: 15px 0 5px;
-        color: #34495e;
+        color: #374151;
     }
 
     input, select {
@@ -91,10 +121,10 @@
         transition: 0.2s ease;
     }
 
-    input:focus {
-        border-color: #3498db;
+    input:focus, select:focus {
+        border-color: #2563eb;
         outline: none;
-        box-shadow: 0 0 4px rgba(52,152,219,0.3);
+        box-shadow: 0 0 4px rgba(37,99,235,0.3);
     }
 
     .counter-group {
@@ -109,7 +139,7 @@
         height: 32px;
         border-radius: 50%;
         border: none;
-        background: #3498db;
+        background: #2563eb;
         color: #fff;
         font-size: 18px;
         cursor: pointer;
@@ -117,25 +147,19 @@
     }
 
     .counter-group button:hover {
-        background: #2179c8;
+        background: #1e40af;
     }
 
     .counter-group input {
         width: 60px;
         text-align: center;
-    }
-
-    .total-price {
-        font-size: 18px;
-        font-weight: 600;
-        color: #e74c3c;
-        margin-top: 25px;
-        text-align: right;
+        border: 1px solid #ccc;
+        border-radius: 6px;
     }
 
     .confirm-btn {
         width: 100%;
-        background: #3498db;
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
         color: #fff;
         padding: 14px;
         border: none;
@@ -144,30 +168,25 @@
         font-weight: 600;
         margin-top: 30px;
         cursor: pointer;
+        box-shadow: 0 6px 16px rgba(37,99,235,0.25);
         transition: 0.3s;
     }
 
     .confirm-btn:hover {
-        background: #2179c8;
-    }
-
-    .price-info p {
-        margin: 8px 0;
-        font-size: 16px;
-    }
-
-    .price-info strong {
-        color: #2c3e50;
+        background: #1e40af;
+        transform: translateY(-2px);
     }
 
     @media(max-width: 900px){
         .booking-wrapper { flex-direction: column; }
+        .total-highlight { text-align: center; font-size: 20px; }
     }
 </style>
 </head>
 
 <body>
     <h1>Booking for <%= tourName %></h1>
+
     <div class="booking-wrapper">
         <!-- LEFT FORM -->
         <div class="form-section">
@@ -175,8 +194,6 @@
                 <input type="hidden" name="tourName" value="<%= tourName %>"/>
                 <input type="hidden" name="adultPrice" value="<%= adultPrice %>"/>
                 <input type="hidden" name="childPrice" value="<%= childPrice %>"/>
-                
-                <!-- Giữ sẵn Online Payment -->
                 <input type="hidden" name="paymentMethod" value="ONLINE"/>
 
                 <label for="name">Full Name</label>
@@ -201,11 +218,10 @@
                     <input type="text" name="numChildren" id="numChildren" value="0" readonly/>
                     <button type="button" onclick="changeCount('numChildren', 1)">+</button>
                 </div>
-                
-                <label for="startDate">Departure Date</label>
-                <input type="date" name="startDate" id="startDate" required onchange="updateInfoDate()"/>
 
-                <p class="total-price">Total: <span id="totalPrice">0</span> VNĐ</p>
+                <label for="startDate">Departure Date</label>
+                <input type="date" name="startDate" id="startDate" required/>
+
                 <button type="submit" class="confirm-btn">Confirm Booking</button>
             </form>
         </div>
@@ -218,6 +234,9 @@
                 <p><strong>Adult Price:</strong> <%= String.format("%,d", adultPrice) %> VNĐ / person</p>
                 <p><strong>Child Price:</strong> <%= String.format("%,d", childPrice) %> VNĐ / child</p>
                 <p><strong>Payment Method:</strong> Online Payment 💳</p>
+            </div>
+            <div class="total-highlight">
+                Total: <span id="totalPrice">0</span> VNĐ
             </div>
         </div>
     </div>
@@ -240,7 +259,6 @@ function updateTotal() {
     const total = adults * adultPrice + children * childPrice;
     document.getElementById("totalPrice").textContent = total.toLocaleString();
 }
-
 updateTotal();
 </script>
 </body>

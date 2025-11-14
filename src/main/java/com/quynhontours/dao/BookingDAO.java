@@ -12,20 +12,17 @@ import com.quynhontours.utils.MongoDBConnection;
 public class BookingDAO {
 
     private final MongoCollection<Document> bookingsColl;
-    private final MongoCollection<Document> ordersColl;
 
     public BookingDAO() {
         MongoDatabase db = MongoDBConnection.getDatabase();
-        bookingsColl = db.getCollection("bookings"); // dữ liệu người dùng
-        ordersColl = db.getCollection("orders");     // dữ liệu admin dashboard
+        bookingsColl = db.getCollection("bookings"); // thống nhất cho cả user và admin
     }
 
-    // Thêm booking mới vào cả 2 collection
+    // Thêm booking mới
     public void insert(Booking b) {
         Document doc = b.toDocument();
 
         bookingsColl.insertOne(doc);
-        ordersColl.insertOne(doc);
 
         // Lưu lại ID
         b.setId(doc.getObjectId("_id").toHexString());
@@ -34,7 +31,7 @@ public class BookingDAO {
     // Lấy tất cả booking (admin)
     public List<Booking> getAllBookings() {
         List<Booking> list = new ArrayList<>();
-        for (Document doc : ordersColl.find()) {
+        for (Document doc : bookingsColl.find()) {
             list.add(Booking.fromDocument(doc));
         }
         return list;
@@ -60,7 +57,6 @@ public class BookingDAO {
     public void updatePaymentStatus(String id, String newStatus) {
         if (id != null && ObjectId.isValid(id)) {
             bookingsColl.updateOne(Filters.eq("_id", new ObjectId(id)), Updates.set("paymentStatus", newStatus));
-            ordersColl.updateOne(Filters.eq("_id", new ObjectId(id)), Updates.set("paymentStatus", newStatus));
         }
     }
 
@@ -68,7 +64,6 @@ public class BookingDAO {
     public void updateOrderStatus(String id, String newStatus) {
         if (id != null && ObjectId.isValid(id)) {
             bookingsColl.updateOne(Filters.eq("_id", new ObjectId(id)), Updates.set("orderStatus", newStatus));
-            ordersColl.updateOne(Filters.eq("_id", new ObjectId(id)), Updates.set("orderStatus", newStatus));
         }
     }
 
@@ -76,7 +71,6 @@ public class BookingDAO {
     public void deleteById(String id) {
         if (id != null && ObjectId.isValid(id)) {
             bookingsColl.deleteOne(Filters.eq("_id", new ObjectId(id)));
-            ordersColl.deleteOne(Filters.eq("_id", new ObjectId(id)));
         }
     }
 }
